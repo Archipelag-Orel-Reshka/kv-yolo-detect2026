@@ -34,6 +34,7 @@ struct FakeMaster {
   bool present = true;
   std::map<uint16_t, int32_t> registers;
   unsigned modeWrites = 0;
+  unsigned rawWriteCalls = 0;
   void begin(uint32_t rate) { baud = rate; }
   void setTimeOut(uint16_t) {}
   uint8_t ping(uint8_t proto, uint8_t id) {
@@ -50,6 +51,11 @@ struct FakeMaster {
       if (address == 6 || address == 8 || address == 11) ++modeWrites;
     }
     return 0;
+  }
+  // Match the real library overload that competes with write<T>(..., value, 0).
+  uint8_t write(uint8_t, uint8_t, uint16_t, uint16_t, const uint8_t *, uint8_t = 2) {
+    ++rawWriteCalls;
+    return 8;
   }
 };
 extern FakeMaster DxlMaster;

@@ -11,6 +11,14 @@ void command(const char *value) {
 }
 
 int main() {
+  // Reproduce the real library's overload ambiguity, then check explicit typing.
+  FakeMaster overload;
+  uint8_t p = 1, id = 22;
+  uint16_t address = 32, value = 50;
+  overload.write(p, id, address, value, 0);
+  assert(overload.rawWriteCalls == 1);
+  overload.write<uint16_t>(p, id, address, value, 0);
+  assert(overload.registers[32] == 50 && overload.rawWriteCalls == 1);
   DxlMaster.registers[8] = 1023;
   setup();
   assert(found && modelNumber == 12 && !running && !initialized);
@@ -89,4 +97,5 @@ int main() {
   DxlMaster.present = false;
   command("SCAN"); command("START 50");
   assert(!found && !running);
+  assert(DxlMaster.rawWriteCalls == 0); // No uint16_t command can bind as a buffer size.
 }

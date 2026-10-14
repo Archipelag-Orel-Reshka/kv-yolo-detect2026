@@ -23,10 +23,43 @@ template <typename T> bool readRegister(uint16_t address, T &value) {
 
 template <typename T> bool writeVerified(uint16_t address, T value) {
   // Ignore write replies, then read back. Works with SRL=1 and SRL=2.
-  DxlMaster.write(protocol, MOTOR_ID, address, value, 0);
+  // Explicit template avoids the raw-buffer overload: literal 0 could bind
+  // to its data pointer and a uint16_t value could be treated as byte count.
+  DxlMaster.write<T>(protocol, MOTOR_ID, address, value, 0);
   delay(5);
   T actual = 0;
-  return readRegister(address, actual) && actual == value;
+  const uint8_t status = DxlMaster.read(protocol, MOTOR_ID, address, actual, 2);
+  if (status == DYN_STATUS_OK && actual == value) return true;
+  Serial.print(F("WRITE_FAILED {\"address\":")); Serial.print(address);
+  Serial.print(F(",\"status\":")); Serial.print(status);
+  Serial.print(F(",\"expected\":")); Serial.print(static_cast<int32_t>(value));
+  Serial.print(F(",\"actual\":")); Serial.print(static_cast<int32_t>(actual));
+  Serial.println(F("}"));
+  return false;
+}
+
+template <typename T> void diagnosticRegister(uint16_t address) {
+  T value = 0;
+  const uint8_t status = DxlMaster.read(protocol, MOTOR_ID, address, value, 2);
+  Serial.print(F("REG {\"address\":")); Serial.print(address);
+  Serial.print(F(",\"status\":")); Serial.print(status);
+  Serial.print(F(",\"value\":")); Serial.print(static_cast<int32_t>(value));
+  Serial.println(F("}"));
+}
+
+void diagnostics() {
+  if (!found || protocol != 1) { Serial.println(F("ERR DIAG NEED_PROTOCOL_1_MOTOR")); return; }
+  diagnosticRegister<uint8_t>(2);  // Firmware version
+  diagnosticRegister<uint16_t>(6); diagnosticRegister<uint16_t>(8);
+  diagnosticRegister<uint16_t>(14); // Maximum torque
+  diagnosticRegister<uint8_t>(16); diagnosticRegister<uint8_t>(18);
+  diagnosticRegister<uint8_t>(24);
+  diagnosticRegister<uint16_t>(32); diagnosticRegister<uint16_t>(34);
+  diagnosticRegister<uint16_t>(38); diagnosticRegister<uint16_t>(40);
+  diagnosticRegister<uint8_t>(42); diagnosticRegister<uint8_t>(43);
+  diagnosticRegister<uint8_t>(47);
+  if (kind == MX64) diagnosticRegister<uint8_t>(70);
+  Serial.println(F("OK DIAG"));
 }
 
 uint16_t torqueAddress() { return kind == XL430 ? 64 : 24; }
@@ -162,6 +195,7 @@ void handleCommand(char *command) {
   }
   if (!strcmp(command, "SCAN")) { scanMotor(); return; }
   if (!strcmp(command, "DISCOVER")) { discoverDevices(); return; }
+  if (!strcmp(command, "DIAG")) { diagnostics(); return; }
   if (!strcmp(command, "INIT")) {
     if (running) { Serial.println(F("ERR INIT RUNNING")); return; }
     initialized = false;
@@ -175,10 +209,9 @@ void handleCommand(char *command) {
     }
     if (!initialized || stopPending) { Serial.println(F("ERR START NEED_INIT")); return; }
     if (!stopMotor()) { faultStop(F("START STOP_FAILED")); return; }
-    // Preload goal with torque off. No stale goal is applied on enable.
-    if (!writeSpeed(speed) || !writeVerified<uint8_t>(torqueAddress(), 1)) {
-      faultStop(F("START WRITE_FAILED")); return;
-    }
+    // Preload a verified goal with torque off, then enable torque.
+    if (!writeSpeed(speed)) { faultStop(F("START SPEED_WRITE_FAILED")); return; }
+    if (!writeVerified<uint8_t>(torqueAddress(), 1)) { faultStop(F("START TORQUE_WRITE_FAILED")); return; }
     requestedSpeed = speed; running = true; lastHeartbeat = millis();
     Serial.println(F("OK START")); printStatus(); return;
   }

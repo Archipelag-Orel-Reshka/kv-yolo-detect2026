@@ -53,7 +53,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", default=DEFAULT_PORT)
     sub = parser.add_subparsers(dest="action", required=True)
-    for name in ("status", "scan", "discover", "init", "stop"):
+    for name in ("status", "scan", "discover", "diag", "init", "stop"):
         sub.add_parser(name)
     run = sub.add_parser("run", help="Physically run the belt, then stop")
     run.add_argument("--speed", type=int, required=True)
