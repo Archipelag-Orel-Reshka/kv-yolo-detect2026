@@ -14,14 +14,16 @@ class Panel:
         self.camera = camera
         self.vision = vision
         self.conveyor = conveyor
+        self._start_reset_lock = threading.Lock()
 
     def state(self):
-        counts, total, tracked = self.vision.counts()
+        measured = self.vision.state()
         return {"camera": {"source": str(self.camera.source), "fps": round(self.vision.fps, 1),
                            "in_frame": self.vision.in_frame, "model": Path(self.vision.weights).name,
+                           "tracking": self.vision.tracking,
                            "error": self.vision.error or self.camera.error},
                 "conveyor": self.conveyor.snapshot(),
-                "counts": counts, "total": total, "tracked": tracked}
+                **measured}
 
 
 def make_handler(panel):
@@ -55,28 +57,58 @@ def make_handler(panel):
                 return self._send_json(panel.state())
             if path == "/video":
                 return self._stream()
+            if path in ("/api/report.txt", "/api/report.csv", "/api/report.json"):
+                format = path.rsplit(".", 1)[1]
+                try:
+                    content = panel.vision.report_bytes(format)
+                except (OSError, ValueError) as exc:
+                    return self._send_json({"ok": False, "error": str(exc)}, 503)
+                content_type = {"txt": "text/plain; charset=utf-8", "csv": "text/csv; charset=utf-8",
+                                "json": "application/json; charset=utf-8"}[format]
+                return self._send(200, content, content_type,
+                                  {"Content-Disposition": f'attachment; filename="conveyor-report.{format}"',
+                                   "Cache-Control": "no-store"})
             self._send_json({"error": "нет такого маршрута"}, 404)
 
         def do_POST(self):
             path = self.path.split("?")[0]
-            length = int(self.headers.get("Content-Length") or 0)
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+                if not 0 <= length <= 4096:
+                    raise ValueError()
+            except ValueError:
+                return self._send_json({"ok": False, "error": "Некорректная длина запроса"}, 400)
             payload = {}
             if length:
                 try:
                     payload = json.loads(self.rfile.read(length).decode("utf-8"))
                 except ValueError:
                     return self._send_json({"ok": False, "error": "Некорректный JSON"}, 400)
+            if not isinstance(payload, dict):
+                return self._send_json({"ok": False, "error": "JSON должен быть объектом"}, 400)
             if path == "/api/start":
-                try:
-                    speed = int(payload.get("speed", 50))
-                except (TypeError, ValueError):
-                    return self._send_json({"ok": False, "error": "Скорость должна быть числом"}, 400)
-                return self._send_json(panel.conveyor.start_belt(speed))
+                speed = payload.get("speed", 50)
+                if type(speed) is not int or not 1 <= abs(speed) <= 300:
+                    return self._send_json({"ok": False, "error": "Введите целую скорость от 1 до 300 по модулю"}, 400)
+                with panel._start_reset_lock:
+                    report = panel.vision.save_report()
+                    error = panel.camera.error or panel.vision.error or (report or {}).get("error")
+                    if error or panel.vision.fps <= 0:
+                        return self._send_json({"ok": False, "error": error or "Подождите видео с камеры"}, 409)
+                    return self._send_json(panel.conveyor.start_belt(speed))
             if path == "/api/stop":
-                return self._send_json(panel.conveyor.stop_belt())
+                result = panel.conveyor.stop_belt()
+                panel.vision.save_report()
+                return self._send_json(result)
             if path == "/api/reset":
-                panel.vision.reset_counts()
-                return self._send_json({"ok": True})
+                with panel._start_reset_lock:
+                    belt = panel.conveyor.snapshot()
+                    if belt["running"] or belt["busy"] or belt.get("status", {}).get("stop_pending"):
+                        return self._send_json({"ok": False, "error": "Сначала остановите ленту"}, 409)
+                    panel.vision.reset_counts()
+                    report = panel.vision.save_report()
+                    return self._send_json({"ok": not bool((report or {}).get("error")),
+                                            "error": (report or {}).get("error")})
             self._send_json({"error": "нет такого маршрута"}, 404)
 
         def _serve_file(self, name):

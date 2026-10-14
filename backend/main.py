@@ -19,6 +19,7 @@ import web
 from camera import Camera, list_devices
 from conveyor import Conveyor
 from counter import LineCounter
+from report import ReportStore
 from vision import Vision, class_names, find_weights
 
 PORT_HINTS = ("1a86", "2341", "2a03", "0403", "10c4", "16c0")  # CH340, Mega, Leonardo, FTDI, CP2102, V-USB
@@ -56,6 +57,8 @@ def parse_args(argv=None):
     parser.add_argument("--margin", type=float, default=0.05, help="полуширина зоны у линии, доля кадра")
     parser.add_argument("--device", default="cpu", help="устройство для YOLO, по умолчанию cpu")
     parser.add_argument("--no-browser", action="store_true", help="не открывать браузер")
+    parser.add_argument("--team", default="Технопарк-33", help="название команды в отчёте")
+    parser.add_argument("--reports-dir", default=str(Path(__file__).resolve().parents[1] / "reports" / "conveyor"))
     return parser.parse_args(argv)
 
 
@@ -81,10 +84,11 @@ def main(argv=None):
     names = class_names(model)
     rows = classes or ([names[i] for i in sorted(names)] if len(names) <= 10 else [])
     counter = LineCounter(rows, line=args.line, axis=args.axis, margin=args.margin)
+    report = ReportStore(args.reports_dir, args.team, rows)
     size = (args.width, args.height) if args.width and args.height else None
     camera = Camera(args.source, size=size)
     vision = Vision(camera, counter, model, weights=weights, confidence=args.conf,
-                    image_size=args.imgsz, classes=classes, device=args.device)
+                    image_size=args.imgsz, classes=classes, device=args.device, report=report)
     port = None if args.no_conveyor else (args.port or default_port())
     conveyor = Conveyor(port)
     httpd = web.serve(web.Panel(camera, vision, conveyor), args.host, args.http_port)
@@ -99,6 +103,7 @@ def main(argv=None):
     print(f"Модель:  {Path(weights).name}, классы: {', '.join(names.values())}")
     print(f"Лента:   {port or 'выключена (--no-conveyor)'}")
     print(f"Линия:   {args.axis} = {args.line:.2f} кадра, зона ±{args.margin:.2f}")
+    print(f"Отчёты:  {report.directory}, команда: {report.team}, сохранено деталей: {counter.total}")
     if not args.no_browser:
         threading.Timer(0.8, lambda: webbrowser.open(url)).start()
 
@@ -117,8 +122,10 @@ def main(argv=None):
         print("Останавливаю: лента, камера, панель.")
         conveyor.close()
         vision.close()
+        vision.save_report()
         camera.close()
         httpd.shutdown()
+        httpd.server_close()
     return 0
 
 

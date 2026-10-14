@@ -17,6 +17,7 @@ class FakeVision:
         self.in_frame = 3
         self.weights = "models/best.pt"
         self.error = None
+        self.tracking = True
         self.counts_value = {"gear": 2, "bolt": 1}
         self.resets = 0
         self._seq = 0
@@ -24,6 +25,13 @@ class FakeVision:
 
     def counts(self):
         return dict(self.counts_value), sum(self.counts_value.values()), 2
+
+    def state(self):
+        counts, total, tracked = self.counts()
+        return {"counts": counts, "total": total, "tracked": tracked, "report": None, "labels": {}}
+
+    def save_report(self):
+        return None
 
     def reset_counts(self):
         self.resets += 1
@@ -102,6 +110,8 @@ class PanelHTTP(unittest.TestCase):
         self.assertEqual(state["counts"], {"gear": 2, "bolt": 1})
         self.assertEqual(state["total"], 3)
         self.assertEqual(state["camera"]["fps"], 12.5)
+        self.assertEqual(state["camera"]["in_frame"], 3)
+        self.assertTrue(state["camera"]["tracking"])
         self.assertEqual(state["conveyor"]["port"], "/dev/ttyUSB0")
 
     def test_start_passes_speed_and_stop_is_separate(self):
@@ -121,6 +131,19 @@ class PanelHTTP(unittest.TestCase):
     def test_reset_clears_counts(self):
         self.assertTrue(self.post("/api/reset")["ok"])
         self.assertEqual(self.get("/api/state")["total"], 0)
+
+    def test_invalid_speeds_never_reach_controller(self):
+        for speed in (0, 301, -301, 1.5, True, "50"):
+            with self.assertRaises(urllib.error.HTTPError):
+                self.post("/api/start", {"speed": speed})
+        self.assertEqual(self.conveyor.calls, [])
+
+    def test_reset_while_running_is_rejected(self):
+        self.post("/api/start", {"speed": 50})
+        with self.assertRaises(urllib.error.HTTPError) as caught:
+            self.post("/api/reset")
+        self.assertEqual(caught.exception.code, 409)
+        self.assertEqual(self.get("/api/state")["total"], 3)
 
     def test_video_stream_sends_jpeg_parts(self):
         # The MJPEG stream has no end: read the first part line by line, then close.

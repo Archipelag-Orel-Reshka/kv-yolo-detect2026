@@ -2,3 +2,4 @@ pyserial==3.5
 opencv-python>=4.9
 ultralytics==8.4.177
 lap>=0.5.12
+Pillow>=10.0

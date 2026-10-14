@@ -10,6 +10,7 @@ c++ -std=c++11 -Wall -Wextra -I tests/stubs tests/firmware_test.cpp -o "$CHECK_D
 "$CHECK_DIR/firmware-test"
 .venv/bin/python -m py_compile tools/conveyor.py backend/*.py
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+node --test tests/test_frontend.mjs
 bash -n tools/*.sh
 git diff --check
 echo 'Control, firmware state transitions, panel, Python and shell checks passed.'

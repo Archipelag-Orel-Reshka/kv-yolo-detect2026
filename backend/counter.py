@@ -50,6 +50,10 @@ class LineCounter:
             if not side:
                 continue
             crossed = track["side"] and side != track["side"]
+            if crossed and not track["counted"] and track["hits"] < self.min_hits:
+                # Keep the original side until the track is confirmed. Otherwise
+                # an early crossing is lost before the third detection arrives.
+                continue
             if crossed and not track["counted"] and track["hits"] >= self.min_hits:
                 # Majority vote over the whole track hides single-frame misclassification.
                 label = track["votes"].most_common(1)[0][0]

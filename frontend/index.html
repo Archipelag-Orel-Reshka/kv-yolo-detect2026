@@ -29,8 +29,9 @@
         <span id="belt-state" class="pill">—</span>
         <span class="muted" id="port"></span>
       </div>
-      <label for="speed">Скорость (1–300)</label>
-      <input id="speed" type="number" value="50" min="1" max="300" step="5">
+      <label for="speed">Скорость, от 1 до 300 по модулю</label>
+      <input id="speed" type="number" value="50" min="-300" max="300" step="1">
+      <p class="muted small">Знак меняет направление. Нулевая скорость не запускает ленту.</p>
       <div class="row buttons">
         <button id="start" class="primary">Запуск</button>
         <button id="stop">Стоп</button>
@@ -50,6 +51,18 @@
         <strong id="total">0</strong>
       </div>
       <button id="reset" class="danger">Сброс счётчиков</button>
+    </section>
+    <section class="card">
+      <h2>Автоматический отчёт</h2>
+      <div id="team"></div>
+      <p class="muted small">Файл обновляется после каждой учтённой детали и остановки ленты.</p>
+      <div id="report-time" class="muted"></div>
+      <p id="report-dir" class="muted small"></p>
+      <p id="report-error" class="error" hidden></p>
+      <div id="report-links" class="row" hidden>
+        <a href="/api/report.txt">Скачать TXT</a>
+        <a href="/api/report.csv">Скачать CSV</a>
+      </div>
     </section>
   </aside>
 </main>

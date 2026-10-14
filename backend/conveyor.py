@@ -61,6 +61,7 @@ class Conveyor(threading.Thread):
         try:
             return future.result(timeout)
         except TimeoutError:
+            future.cancel()  # Never execute a queued request after its caller gave up.
             return {"ok": False, "error": "Контроллер не ответил вовремя"}
 
     # Serial thread.
@@ -114,7 +115,8 @@ class Conveyor(threading.Thread):
                 _, _, future = self._requests.get_nowait()
             except queue.Empty:
                 return
-            future.set_result({"ok": False, "error": error})
+            if not future.cancelled():
+                future.set_result({"ok": False, "error": error})
 
     def _serve(self):
         last_ping = last_status = 0.0
@@ -124,9 +126,14 @@ class Conveyor(threading.Thread):
             except queue.Empty:
                 pass
             else:
+                if not future.set_running_or_notify_cancel():
+                    continue
                 self._set(busy=True)
                 try:
                     future.set_result(self._do_start(arg) if action == "start" else self._do_stop())
+                except (serial.SerialException, OSError, TimeoutError) as exc:
+                    future.set_result({"ok": False, "error": f"Нет связи с контроллером: {exc}"})
+                    raise
                 finally:
                     self._set(busy=False)
             now = time.monotonic()
@@ -144,6 +151,7 @@ class Conveyor(threading.Thread):
             # INIT is refused while running; a running belt only changes speed.
             ok, error = self._command("INIT", timeout=10)
             if not ok:
+                self._set(error=error)
                 return {"ok": False, "error": error}
         ok, error = self._command(f"START {speed}", timeout=5)
         if not ok:

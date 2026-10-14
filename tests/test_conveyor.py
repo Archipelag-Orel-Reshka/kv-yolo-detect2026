@@ -163,6 +163,19 @@ class ConveyorLink(unittest.TestCase):
         self.assertEqual(self.firmware.commands[-1], "STOP")
         self.assertFalse(self.firmware.is_open)
 
+    def test_timed_out_queued_start_is_never_executed(self):
+        self.link.close()
+        self.link = conveyor.Conveyor("FAKE")
+        self.link._set(connected=True)
+        result = self.link.start_belt(50, timeout=0.01)
+        self.assertFalse(result["ok"])
+        self.link._set(connected=False)
+        self.link.start()
+        self.assertTrue(wait_until(lambda: self.link.snapshot()["connected"]))
+        firmware = FakeFirmware.last
+        time.sleep(0.1)
+        self.assertFalse(any(command.startswith("START") for command in firmware.commands))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

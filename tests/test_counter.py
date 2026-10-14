@@ -57,6 +57,27 @@ class Counting(unittest.TestCase):
         self.feed(2, 300)
         self.assertEqual(self.counter.total, 0)
 
+    def test_early_crossing_is_counted_after_track_confirmation(self):
+        for centre in (100, 300, 320, 330):
+            self.feed(2, centre)
+        self.assertEqual(self.counter.total, 1)
+
+    def test_early_crossing_then_return_does_not_count(self):
+        for centre in (100, 300, 150, 140):
+            self.feed(2, centre)
+        self.assertEqual(self.counter.total, 0)
+
+    def test_long_stop_and_temporary_missing_detection_does_not_recount(self):
+        for centre in (100, 150, 300):
+            self.feed(7, centre)
+        for _ in range(600):
+            self.feed(7, 300)
+        for _ in range(30):
+            self.counter.update([], self.width, self.height)
+        for centre in (300, 320, 350):
+            self.feed(7, centre)
+        self.assertEqual(self.counter.total, 1)
+
     def test_two_parts_are_counted_separately(self):
         # Each part needs min_hits detections before it can be counted.
         for centre in (80, 140, 190, 240, 300):

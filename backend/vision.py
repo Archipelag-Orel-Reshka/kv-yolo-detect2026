@@ -5,9 +5,13 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+
+from labels import display_name, LABELS
 
 MODELS = Path(__file__).resolve().parents[1] / "models"
 FONT = cv2.FONT_HERSHEY_SIMPLEX
+TEXT_FONT = ImageFont.truetype(str(MODELS.parent / "assets/fonts/DejaVuSans.ttf"), 17)
 LINE_COLOUR = (0, 220, 255)
 COLOURS = [(60, 196, 60), (240, 150, 60), (60, 140, 240), (200, 90, 220),
            (80, 220, 220), (180, 180, 60), (120, 120, 240), (60, 220, 160)]
@@ -40,24 +44,29 @@ def draw(frame, detections, counter, fps):
         else:
             cv2.line(frame, (0, line + offset), (width, line + offset), colour, thickness)
     order = list(counter.counts)
+    captions = []
     for track_id, name, confidence, x1, y1, x2, y2, counted in detections:
         if name not in order:
             order.append(name)
         colour = COLOURS[order.index(name) % len(COLOURS)]
         cv2.rectangle(frame, (x1, y1), (x2, y2), colour, 4 if counted else 2)
-        caption = f"{name} {confidence:.2f}" + (f" #{track_id}" if track_id is not None else "")
+        caption = f"{display_name(name)} {confidence:.2f}" + (f" #{track_id}" if track_id is not None else "")
         if counted:
             caption += " +1"
-        (text_w, text_h), _ = cv2.getTextSize(caption, FONT, 0.55, 1)
-        top = max(text_h + 8, y1)
-        cv2.rectangle(frame, (x1, top - text_h - 8), (x1 + text_w + 8, top), colour, -1)
-        cv2.putText(frame, caption, (x1 + 4, top - 5), FONT, 0.55, (15, 15, 15), 1, cv2.LINE_AA)
+        left = min(max(0, x1), max(0, width - int(TEXT_FONT.getlength(caption)) - 8))
+        captions.append((left, max(0, y1 - 26), caption, colour))
         cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
         cv2.circle(frame, (cx, cy), 4, colour, -1)
     cv2.rectangle(frame, (0, height - 30), (width, height), (20, 20, 20), -1)
-    cv2.putText(frame, f"TOTAL {counter.total}   {fps:4.1f} FPS", (10, height - 9),
-                FONT, 0.6, (240, 240, 240), 1, cv2.LINE_AA)
-    return frame
+    canvas = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    painter = ImageDraw.Draw(canvas)
+    for left, top, caption, colour in captions:
+        painter.rectangle((left, top, left + TEXT_FONT.getlength(caption) + 8, top + 25),
+                          fill=tuple(reversed(colour)))
+        painter.text((left + 4, top + 2), caption, font=TEXT_FONT, fill=(15, 15, 15))
+    painter.text((10, height - 26), f"Всего: {counter.total}   {fps:4.1f} кадров/с",
+                 font=TEXT_FONT, fill=(240, 240, 240))
+    return cv2.cvtColor(np.asarray(canvas), cv2.COLOR_RGB2BGR)
 
 
 def placeholder(text, detail=None):
@@ -76,7 +85,7 @@ class Vision(threading.Thread):
     """
 
     def __init__(self, camera, counter, model, weights=None, confidence=0.25, image_size=512,
-                 classes=None, device="cpu", tracker="bytetrack.yaml"):
+                 classes=None, device="cpu", tracker="bytetrack.yaml", report=None):
         super().__init__(name="vision", daemon=True)
         self.camera = camera
         self.counter = counter
@@ -90,8 +99,13 @@ class Vision(threading.Thread):
         if device:
             self.options["device"] = device
         self.lock = threading.Lock()
+        self.report = report
+        if report:
+            self.counter.counts = dict(report.current["counts"])
         self.fps = 0.0
         self.in_frame = 0
+        self.tracking = True
+        self.active_tracks = 0
         self.error = None
         self._recent = {}  # track id -> frame number when it was counted, for the +1 badge
         self._jpeg = None
@@ -101,12 +115,33 @@ class Vision(threading.Thread):
 
     def counts(self):
         with self.lock:
-            return dict(self.counter.counts), self.counter.total, len(self.counter.tracks)
+            return dict(self.counter.counts), self.counter.total, self.active_tracks
+
+    def state(self):
+        with self.lock:
+            return {"counts": dict(self.counter.counts), "total": self.counter.total,
+                    "tracked": self.active_tracks, "labels": LABELS,
+                    "report": self.report.info() if self.report else None}
+
+    def save_report(self):
+        with self.lock:
+            return self.report.save(self.counter.counts) if self.report else None
+
+    def report_bytes(self, format):
+        with self.lock:
+            if not self.report:
+                raise ValueError("Отчёты отключены")
+            self.report.save(self.counter.counts)
+            if self.report.error:
+                raise OSError(self.report.error)
+            return self.report.read(format)
 
     def reset_counts(self):
         with self.lock:
             self.counter.reset()
             self._recent.clear()
+            if self.report:
+                self.report.new_run(self.counter.counts)
 
     def wait_jpeg(self, last_seq, timeout=1.0):
         with self._new_jpeg:
@@ -125,6 +160,8 @@ class Vision(threading.Thread):
             seq, frame = self.camera.wait_frame(seq)
             if frame is None:
                 if self.camera.error:
+                    self.fps = 0.0
+                    self.in_frame = self.active_tracks = 0
                     self._publish(placeholder("NO CAMERA SIGNAL", str(self.camera.source)))
                 continue
             try:
@@ -132,6 +169,8 @@ class Vision(threading.Thread):
                 self.error = None
             except Exception as exc:  # Shown in the panel; the next frame retries.
                 self.error = f"Ошибка детектора: {exc}"
+                self.tracking = False
+                self.in_frame = self.active_tracks = 0
                 detections = []
             now = time.monotonic()
             stamps = [t for t in stamps if now - t < 2.0] + [now]
@@ -155,10 +194,15 @@ class Vision(threading.Thread):
             frame_no = self.counter.frame + 1
             # A box without a track id (first frame of a track) cannot be counted safely.
             tracked = [(t, n, x1, y1, x2, y2) for t, n, _, x1, y1, x2, y2 in found if t is not None]
-            for track_id, _ in self.counter.update(tracked, width, height):
+            counted = self.counter.update(tracked, width, height)
+            for track_id, _ in counted:
                 self._recent[track_id] = frame_no
+            if self.report and (counted or self.report.error):
+                self.report.save(self.counter.counts)
             self._recent = {t: f for t, f in self._recent.items() if frame_no - f < 15}
             self.in_frame = len(found)
+            self.active_tracks = len(tracked)
+            self.tracking = not found or bool(tracked)
             return [(t, self.counter.label(t) or n, c, x1, y1, x2, y2, t in self._recent)
                     for t, n, c, x1, y1, x2, y2 in found]
 

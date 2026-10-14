@@ -135,3 +135,6 @@ td:last-child { text-align: right; font-weight: 600; }
 }
 
 .total strong { font-size: 26px; }
+a { color: var(--accent); }
+#report-dir { overflow-wrap: anywhere; }
+[hidden] { display: none !important; }

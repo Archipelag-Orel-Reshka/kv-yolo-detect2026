@@ -15,7 +15,7 @@ class Camera(threading.Thread):
         super().__init__(name="camera", daemon=True)
         self.source = source
         self.size = size
-        self.is_file = not str(source).isdigit()
+        self.is_file = not str(source).isdigit() and not str(source).startswith("/dev/")
         self.error = None
         self._frame = None
         self._seq = 0
@@ -25,7 +25,8 @@ class Camera(threading.Thread):
     def _open(self):
         if self.is_file:
             return cv2.VideoCapture(self.source)
-        capture = cv2.VideoCapture(int(self.source))
+        device = int(self.source) if str(self.source).isdigit() else str(self.source)
+        capture = cv2.VideoCapture(device, cv2.CAP_V4L2)
         if self.size:
             capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
             capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.size[0])
@@ -47,6 +48,7 @@ class Camera(threading.Thread):
                 ok, frame = capture.read()
                 if not ok and self.is_file:
                     capture.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    self._closing.wait(0.05)
                     continue
                 if not ok:
                     self.error = f"Камера {self.source} перестала отдавать кадры"
