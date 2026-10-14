@@ -1,0 +1,2693 @@
+{
+  "threshold": 0.25,
+  "iou_match": 0.5,
+  "matrix_order": [
+    "Pin",
+    "Piston",
+    "Shatun",
+    "background"
+  ],
+  "note": "rows=predicted, columns=actual; exact_count_images is a still-image check, not a belt run",
+  "baseline": {
+    "weights_sha256": "333a8d1648370557e762392b9753f830da32f7a0f886196b8533f02a8e4e5fb4",
+    "splits": {
+      "valid": {
+        "images": 12,
+        "exact_count_images": 3,
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            0,
+            6
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            3,
+            0,
+            3,
+            0
+          ]
+        ],
+        "class_errors": 0,
+        "missed": 6,
+        "extra": 7,
+        "valve_as_rod": 0,
+        "rod_as_valve": 0,
+        "files": [
+          {
+            "image": "dddd_jpg.rf.3c0327fd035874b138202044022fa64e.jpg",
+            "source_group": "v1-g05",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  104.62042236328125,
+                  102.893310546875,
+                  254.88592529296875,
+                  244.83236694335938
+                ],
+                "confidence": 0.9608545303344727
+              }
+            ]
+          },
+          {
+            "image": "g03_aug01_jpg.rf.40a25cf959f68624dfc56509a4c5ac3a.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Pin": 2,
+              "Shatun": 1
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  229.76730346679688,
+                  188.14373779296875,
+                  260.0989685058594,
+                  216.7060546875
+                ],
+                "confidence": 0.6564314365386963
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  213.5048828125,
+                  283.70916748046875,
+                  274.14703369140625,
+                  332.0069580078125
+                ],
+                "confidence": 0.477311909198761
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  203.21636962890625,
+                  188.56027221679688,
+                  281.43133544921875,
+                  333.2889099121094
+                ],
+                "confidence": 0.4203983247280121
+              }
+            ]
+          },
+          {
+            "image": "g03_aug02_jpg.rf.a75909dc6e14857cb34512b2c2126e91.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Pin": 2,
+              "Shatun": 1
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  229.94183349609375,
+                  188.31103515625,
+                  260.7513427734375,
+                  216.7041015625
+                ],
+                "confidence": 0.6606061458587646
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  203.15838623046875,
+                  188.2982635498047,
+                  281.5013122558594,
+                  333.35699462890625
+                ],
+                "confidence": 0.5068009495735168
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  213.11337280273438,
+                  282.8126220703125,
+                  273.9955139160156,
+                  331.56866455078125
+                ],
+                "confidence": 0.3957245647907257
+              }
+            ]
+          },
+          {
+            "image": "g07_aug01_jpg.rf.53999d1aea317d8fe6e0fe5ec01f9d9d.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g07_aug02_jpg.rf.68866fae74915deb2ae7dadbcb96482e.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g10_aug01_jpg.rf.593a27fa775aa06ad967088c9ab6bc86.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g10_aug02_jpg.rf.bc9d2bc4fc6db6872b8875af49ce600e.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Piston": 1
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Piston",
+                "xyxy": [
+                  0.0,
+                  0.0,
+                  71.94911193847656,
+                  78.08203125
+                ],
+                "confidence": 0.2704871892929077
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_11-56-27_jpg.rf.14113a832115cf1e7ba0332c1acf5df8.jpg",
+            "source_group": "v1-g08",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  228.62161254882812,
+                  141.61685180664062,
+                  265.6321105957031,
+                  178.61550903320312
+                ],
+                "confidence": 0.9303355813026428
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_11-56-54_jpg.rf.03bf79cf0e3436ec5672373ef3767c5e.jpg",
+            "source_group": "v1-g12",
+            "expected": {
+              "Piston": 1
+            },
+            "detected": {
+              "Piston": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Piston",
+                "xyxy": [
+                  279.595703125,
+                  113.24160766601562,
+                  390.4124755859375,
+                  214.62298583984375
+                ],
+                "confidence": 0.981624186038971
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-10_jpg.rf.70f17be0c0d9471cd8e21595236c2dac.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Pin": 2,
+              "Shatun": 1
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  230.05072021484375,
+                  188.46212768554688,
+                  260.75823974609375,
+                  216.75509643554688
+                ],
+                "confidence": 0.6542258262634277
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  203.64321899414062,
+                  188.64279174804688,
+                  281.7271728515625,
+                  333.2584533691406
+                ],
+                "confidence": 0.5235554575920105
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  213.40936279296875,
+                  282.65496826171875,
+                  274.03631591796875,
+                  331.68438720703125
+                ],
+                "confidence": 0.35301750898361206
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-33_jpg.rf.10df9fa3ab48f07dcbc1bedd3274ba47.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "photo_2026-10-14_15-05-46_jpg.rf.71d30ffca755f740bf8c553b28cc3307.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": []
+          }
+        ]
+      },
+      "test": {
+        "images": 12,
+        "exact_count_images": 3,
+        "confusion_matrix": [
+          [
+            4,
+            0,
+            0,
+            6
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            9,
+            0,
+            3,
+            0
+          ]
+        ],
+        "class_errors": 0,
+        "missed": 12,
+        "extra": 6,
+        "valve_as_rod": 0,
+        "rod_as_valve": 0,
+        "files": [
+          {
+            "image": "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg",
+            "source_group": "v1-g06",
+            "expected": {
+              "Piston": 1
+            },
+            "detected": {
+              "Piston": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Piston",
+                "xyxy": [
+                  148.27200317382812,
+                  133.41897583007812,
+                  262.23541259765625,
+                  236.09487915039062
+                ],
+                "confidence": 0.9877281188964844
+              }
+            ]
+          },
+          {
+            "image": "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg",
+            "source_group": "v1-g04",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  180.1092529296875,
+                  157.0768585205078,
+                  328.6514892578125,
+                  268.67120361328125
+                ],
+                "confidence": 0.9588384032249451
+              }
+            ]
+          },
+          {
+            "image": "g01_aug01_jpg.rf.8bba5904520e95e36ed26da30a3acd38.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g01_aug02_jpg.rf.d5616a3cd891df7b27010b7eda01711f.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g04_aug01_jpg.rf.a89e4ac34b9d1915bf204128b2534f22.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 3,
+              "Shatun": 2
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  176.0739288330078,
+                  211.12159729003906,
+                  207.0482177734375,
+                  242.87872314453125
+                ],
+                "confidence": 0.9230189919471741
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  283.9044189453125,
+                  226.4974365234375,
+                  366.17071533203125,
+                  369.8964538574219
+                ],
+                "confidence": 0.8489574790000916
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  353.43365478515625,
+                  27.597347259521484,
+                  429.69158935546875,
+                  171.65420532226562
+                ],
+                "confidence": 0.7878344655036926
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  382.3602600097656,
+                  27.411108016967773,
+                  415.8554382324219,
+                  58.83677673339844
+                ],
+                "confidence": 0.46081700921058655
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  360.48199462890625,
+                  125.42239379882812,
+                  420.7907409667969,
+                  172.22422790527344
+                ],
+                "confidence": 0.3119750916957855
+              }
+            ]
+          },
+          {
+            "image": "g04_aug02_jpg.rf.718c88a303ffccd1da98632d7e3f9f4d.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 3,
+              "Shatun": 2
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  175.93577575683594,
+                  211.12538146972656,
+                  206.7339324951172,
+                  242.8502197265625
+                ],
+                "confidence": 0.9221276640892029
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  284.04180908203125,
+                  226.6422576904297,
+                  366.6036376953125,
+                  369.8358154296875
+                ],
+                "confidence": 0.8467461466789246
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  353.2522888183594,
+                  27.112102508544922,
+                  429.6322326660156,
+                  171.3418426513672
+                ],
+                "confidence": 0.7883338332176208
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  381.8600769042969,
+                  26.861412048339844,
+                  415.56158447265625,
+                  58.3065299987793
+                ],
+                "confidence": 0.43309712409973145
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  360.67254638671875,
+                  125.34188079833984,
+                  420.77313232421875,
+                  172.1516876220703
+                ],
+                "confidence": 0.3269958198070526
+              }
+            ]
+          },
+          {
+            "image": "g08_aug01_jpg.rf.1553630183087985c70969b87eead4b2.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "g08_aug02_jpg.rf.30b1ab79be44311877afa096bf8401f2.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg",
+            "source_group": "v1-g09",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  241.21490478515625,
+                  130.14903259277344,
+                  279.0336608886719,
+                  178.05038452148438
+                ],
+                "confidence": 0.3825286030769348
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-04-40_jpg.rf.e34edd891354d1c04409e3f59d442f8b.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": []
+          },
+          {
+            "image": "photo_2026-10-14_15-05-17_jpg.rf.2fef452135b44610b000de28be2d31d2.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 3,
+              "Shatun": 2
+            },
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  176.18832397460938,
+                  211.08563232421875,
+                  207.4584197998047,
+                  242.7517852783203
+                ],
+                "confidence": 0.9374829530715942
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  284.1429748535156,
+                  227.10121154785156,
+                  366.5805969238281,
+                  370.0228271484375
+                ],
+                "confidence": 0.8459924459457397
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  353.5160827636719,
+                  27.461454391479492,
+                  429.85504150390625,
+                  171.6986083984375
+                ],
+                "confidence": 0.7777422666549683
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  381.9299621582031,
+                  27.1734676361084,
+                  415.4266662597656,
+                  57.928375244140625
+                ],
+                "confidence": 0.5631609559059143
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  360.75079345703125,
+                  125.8703842163086,
+                  420.9936218261719,
+                  172.34597778320312
+                ],
+                "confidence": 0.39915788173675537
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-37_jpg.rf.5d212b755bc0f19101bad32f36801d2a.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {},
+            "counts_match": false,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": []
+          }
+        ]
+      }
+    }
+  },
+  "candidate": {
+    "weights_sha256": "d37349daec7c0e99dbd0675bdafd2cc668f58798cae60054623dc0e56a210a1d",
+    "splits": {
+      "valid": {
+        "images": 12,
+        "exact_count_images": 12,
+        "confusion_matrix": [
+          [
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            6,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "class_errors": 0,
+        "missed": 1,
+        "extra": 1,
+        "valve_as_rod": 0,
+        "rod_as_valve": 0,
+        "files": [
+          {
+            "image": "dddd_jpg.rf.3c0327fd035874b138202044022fa64e.jpg",
+            "source_group": "v1-g05",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  103.608154296875,
+                  101.77407836914062,
+                  256.7327575683594,
+                  244.667724609375
+                ],
+                "confidence": 0.9214068651199341
+              }
+            ]
+          },
+          {
+            "image": "g03_aug01_jpg.rf.40a25cf959f68624dfc56509a4c5ac3a.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  214.2916259765625,
+                  189.23146057128906,
+                  272.401611328125,
+                  327.961669921875
+                ],
+                "confidence": 0.8940678834915161
+              }
+            ]
+          },
+          {
+            "image": "g03_aug02_jpg.rf.a75909dc6e14857cb34512b2c2126e91.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  213.678466796875,
+                  189.53750610351562,
+                  273.35272216796875,
+                  327.8985900878906
+                ],
+                "confidence": 0.8973972201347351
+              }
+            ]
+          },
+          {
+            "image": "g07_aug01_jpg.rf.53999d1aea317d8fe6e0fe5ec01f9d9d.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  191.399169921875,
+                  205.98260498046875,
+                  334.57275390625,
+                  264.25726318359375
+                ],
+                "confidence": 0.8019929528236389
+              }
+            ]
+          },
+          {
+            "image": "g07_aug02_jpg.rf.68866fae74915deb2ae7dadbcb96482e.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  190.42645263671875,
+                  206.94091796875,
+                  331.16497802734375,
+                  264.11627197265625
+                ],
+                "confidence": 0.8055379986763
+              }
+            ]
+          },
+          {
+            "image": "g10_aug01_jpg.rf.593a27fa775aa06ad967088c9ab6bc86.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  259.45404052734375,
+                  269.9122314453125,
+                  289.36865234375,
+                  315.5501708984375
+                ],
+                "confidence": 0.8783641457557678
+              }
+            ]
+          },
+          {
+            "image": "g10_aug02_jpg.rf.bc9d2bc4fc6db6872b8875af49ce600e.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  259.0792236328125,
+                  269.55792236328125,
+                  289.34765625,
+                  315.73406982421875
+                ],
+                "confidence": 0.8736713528633118
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_11-56-27_jpg.rf.14113a832115cf1e7ba0332c1acf5df8.jpg",
+            "source_group": "v1-g08",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  228.49368286132812,
+                  141.97857666015625,
+                  265.2928771972656,
+                  178.59881591796875
+                ],
+                "confidence": 0.9385298490524292
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_11-56-54_jpg.rf.03bf79cf0e3436ec5672373ef3767c5e.jpg",
+            "source_group": "v1-g12",
+            "expected": {
+              "Piston": 1
+            },
+            "detected": {
+              "Piston": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Piston",
+                "xyxy": [
+                  280.167724609375,
+                  111.53250122070312,
+                  389.9696044921875,
+                  214.18533325195312
+                ],
+                "confidence": 0.9918417930603027
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-10_jpg.rf.70f17be0c0d9471cd8e21595236c2dac.jpg",
+            "source_group": "v2-g03",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  213.830810546875,
+                  189.67971801757812,
+                  273.3100280761719,
+                  328.1471252441406
+                ],
+                "confidence": 0.9001599550247192
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-33_jpg.rf.10df9fa3ab48f07dcbc1bedd3274ba47.jpg",
+            "source_group": "v2-g07",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  190.3018341064453,
+                  206.6778564453125,
+                  331.27166748046875,
+                  263.67431640625
+                ],
+                "confidence": 0.8091945052146912
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-46_jpg.rf.71d30ffca755f740bf8c553b28cc3307.jpg",
+            "source_group": "v2-g10",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  259.13482666015625,
+                  269.63250732421875,
+                  289.59283447265625,
+                  315.66070556640625
+                ],
+                "confidence": 0.8899503350257874
+              }
+            ]
+          }
+        ]
+      },
+      "test": {
+        "images": 12,
+        "exact_count_images": 12,
+        "confusion_matrix": [
+          [
+            13,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "class_errors": 0,
+        "missed": 0,
+        "extra": 0,
+        "valve_as_rod": 0,
+        "rod_as_valve": 0,
+        "files": [
+          {
+            "image": "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg",
+            "source_group": "v1-g06",
+            "expected": {
+              "Piston": 1
+            },
+            "detected": {
+              "Piston": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Piston",
+                "xyxy": [
+                  147.466064453125,
+                  133.2392578125,
+                  262.3175048828125,
+                  238.19622802734375
+                ],
+                "confidence": 0.9850971102714539
+              }
+            ]
+          },
+          {
+            "image": "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg",
+            "source_group": "v1-g04",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  180.50381469726562,
+                  157.2152862548828,
+                  329.5162048339844,
+                  268.55511474609375
+                ],
+                "confidence": 0.9702606797218323
+              }
+            ]
+          },
+          {
+            "image": "g01_aug01_jpg.rf.8bba5904520e95e36ed26da30a3acd38.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {
+              "Pin": 3
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  355.1160888671875,
+                  101.78091430664062,
+                  386.86474609375,
+                  148.66409301757812
+                ],
+                "confidence": 0.8331519365310669
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  222.6878662109375,
+                  235.21002197265625,
+                  252.96932983398438,
+                  279.74749755859375
+                ],
+                "confidence": 0.8022968173027039
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  366.208251953125,
+                  328.66949462890625,
+                  397.33795166015625,
+                  374.23931884765625
+                ],
+                "confidence": 0.7802047729492188
+              }
+            ]
+          },
+          {
+            "image": "g01_aug02_jpg.rf.d5616a3cd891df7b27010b7eda01711f.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {
+              "Pin": 3
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  355.2807312011719,
+                  102.54142761230469,
+                  386.5403137207031,
+                  148.05772399902344
+                ],
+                "confidence": 0.8380008339881897
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  222.7125244140625,
+                  235.3250732421875,
+                  253.93841552734375,
+                  280.14788818359375
+                ],
+                "confidence": 0.8197951316833496
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  366.54217529296875,
+                  328.13946533203125,
+                  395.54132080078125,
+                  373.37762451171875
+                ],
+                "confidence": 0.7797757983207703
+              }
+            ]
+          },
+          {
+            "image": "g04_aug01_jpg.rf.a89e4ac34b9d1915bf204128b2534f22.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  360.195068359375,
+                  27.159160614013672,
+                  422.30621337890625,
+                  168.69125366210938
+                ],
+                "confidence": 0.9322355389595032
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  176.55628967285156,
+                  211.1149139404297,
+                  207.4366455078125,
+                  242.83038330078125
+                ],
+                "confidence": 0.9297844171524048
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  290.75030517578125,
+                  226.04244995117188,
+                  358.9092102050781,
+                  366.8363952636719
+                ],
+                "confidence": 0.7604693174362183
+              }
+            ]
+          },
+          {
+            "image": "g04_aug02_jpg.rf.718c88a303ffccd1da98632d7e3f9f4d.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  360.26068115234375,
+                  26.895593643188477,
+                  422.3235168457031,
+                  168.50357055664062
+                ],
+                "confidence": 0.9322836399078369
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  176.48789978027344,
+                  211.2652130126953,
+                  206.983154296875,
+                  242.83877563476562
+                ],
+                "confidence": 0.9311344623565674
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  290.77728271484375,
+                  225.8330535888672,
+                  359.11279296875,
+                  366.5658874511719
+                ],
+                "confidence": 0.7769822478294373
+              }
+            ]
+          },
+          {
+            "image": "g08_aug01_jpg.rf.1553630183087985c70969b87eead4b2.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  170.48948669433594,
+                  207.4167022705078,
+                  313.1534118652344,
+                  262.08270263671875
+                ],
+                "confidence": 0.7642731070518494
+              }
+            ]
+          },
+          {
+            "image": "g08_aug02_jpg.rf.30b1ab79be44311877afa096bf8401f2.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  170.92539978027344,
+                  207.57388305664062,
+                  312.85052490234375,
+                  261.9917907714844
+                ],
+                "confidence": 0.7433667182922363
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg",
+            "source_group": "v1-g09",
+            "expected": {
+              "Pin": 1
+            },
+            "detected": {
+              "Pin": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  243.11721801757812,
+                  125.609619140625,
+                  280.15631103515625,
+                  178.2833251953125
+                ],
+                "confidence": 0.8174480199813843
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-04-40_jpg.rf.e34edd891354d1c04409e3f59d442f8b.jpg",
+            "source_group": "v2-g01",
+            "expected": {
+              "Pin": 3
+            },
+            "detected": {
+              "Pin": 3
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Pin",
+                "xyxy": [
+                  355.0791015625,
+                  101.59527587890625,
+                  386.64215087890625,
+                  148.53713989257812
+                ],
+                "confidence": 0.8394612669944763
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  222.40577697753906,
+                  235.2593994140625,
+                  254.06919860839844,
+                  279.90673828125
+                ],
+                "confidence": 0.8135371804237366
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  365.7637939453125,
+                  328.16510009765625,
+                  395.3570556640625,
+                  373.534912109375
+                ],
+                "confidence": 0.7805486917495728
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-17_jpg.rf.2fef452135b44610b000de28be2d31d2.jpg",
+            "source_group": "v2-g04",
+            "expected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "detected": {
+              "Pin": 1,
+              "Shatun": 2
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  360.2865295410156,
+                  26.971050262451172,
+                  422.6651916503906,
+                  168.66787719726562
+                ],
+                "confidence": 0.937834620475769
+              },
+              {
+                "class": "Pin",
+                "xyxy": [
+                  176.48297119140625,
+                  211.31507873535156,
+                  207.00387573242188,
+                  242.5155792236328
+                ],
+                "confidence": 0.9360077381134033
+              },
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  289.9736022949219,
+                  227.75796508789062,
+                  358.92889404296875,
+                  370.12322998046875
+                ],
+                "confidence": 0.7546553015708923
+              }
+            ]
+          },
+          {
+            "image": "photo_2026-10-14_15-05-37_jpg.rf.5d212b755bc0f19101bad32f36801d2a.jpg",
+            "source_group": "v2-g08",
+            "expected": {
+              "Shatun": 1
+            },
+            "detected": {
+              "Shatun": 1
+            },
+            "counts_match": true,
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "detections": [
+              {
+                "class": "Shatun",
+                "xyxy": [
+                  171.02197265625,
+                  207.3932647705078,
+                  312.7478942871094,
+                  262.0740966796875
+                ],
+                "confidence": 0.7236132621765137
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

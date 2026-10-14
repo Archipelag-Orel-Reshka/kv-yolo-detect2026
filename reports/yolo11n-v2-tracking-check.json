@@ -1,0 +1,89 @@
+{
+  "kind": "synthetic translated photos with pause, not a physical belt run",
+  "checks": [
+    {
+      "source": "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg",
+      "expected": "Piston",
+      "count_delta": {
+        "Pin": 0,
+        "Piston": 1,
+        "Shatun": 0
+      },
+      "classes_seen": [
+        "Piston"
+      ],
+      "passed": true
+    },
+    {
+      "source": "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg",
+      "expected": "Shatun",
+      "count_delta": {
+        "Pin": 0,
+        "Piston": 0,
+        "Shatun": 1
+      },
+      "classes_seen": [
+        "Shatun"
+      ],
+      "passed": true
+    },
+    {
+      "source": "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg",
+      "expected": "Pin",
+      "count_delta": {
+        "Pin": 1,
+        "Piston": 0,
+        "Shatun": 0
+      },
+      "classes_seen": [
+        "Pin"
+      ],
+      "passed": true
+    },
+    {
+      "source": "photo_2026-10-14_15-05-10_jpg.rf.70f17be0c0d9471cd8e21595236c2dac.jpg",
+      "expected": "Shatun",
+      "count_delta": {
+        "Pin": 0,
+        "Piston": 0,
+        "Shatun": 1
+      },
+      "classes_seen": [
+        "Shatun"
+      ],
+      "passed": true
+    },
+    {
+      "source": "photo_2026-10-14_15-05-37_jpg.rf.5d212b755bc0f19101bad32f36801d2a.jpg",
+      "expected": "Shatun",
+      "count_delta": {
+        "Pin": 0,
+        "Piston": 0,
+        "Shatun": 1
+      },
+      "classes_seen": [
+        "Shatun"
+      ],
+      "passed": true
+    },
+    {
+      "source": "photo_2026-10-14_15-05-46_jpg.rf.71d30ffca755f740bf8c553b28cc3307.jpg",
+      "expected": "Pin",
+      "count_delta": {
+        "Pin": 1,
+        "Piston": 0,
+        "Shatun": 0
+      },
+      "classes_seen": [
+        "Pin"
+      ],
+      "passed": true
+    }
+  ],
+  "counts": {
+    "Pin": 2,
+    "Piston": 1,
+    "Shatun": 3
+  },
+  "total": 6
+}

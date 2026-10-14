@@ -42,8 +42,8 @@ def detection_label(line):
     return cls, f"{cls} " + " ".join(f"{v:.8f}" for v in box), polygon
 
 
-def prepare(archive, output):
-    raw = ROOT / "models" / "annotated-source"
+def prepare(archive, output, raw=None, groups_config=None, expected_count=50, audit_report=None):
+    raw = raw or ROOT / "models" / "annotated-source"
     if raw.exists() or output.exists():
         raise FileExistsError("Prepared dataset already exists; refusing to overwrite it")
     with zipfile.ZipFile(archive) as bundle:
@@ -69,7 +69,14 @@ def prepare(archive, output):
     if names != ["Pin", "Piston", "Shatun"] or original_config["nc"] != 3:
         raise ValueError(f"Unexpected class mapping: {names}")
     manifest = ROOT / "dataset" / "roboflow-manifest.csv"
-    if manifest.exists():
+    image_groups = {}
+    if groups_config:
+        group_data = json.loads(groups_config.read_text())
+        if group_data.get("archive_sha256") != hashlib.sha256(archive.read_bytes()).hexdigest():
+            raise ValueError("Source groups belong to a different archive")
+        aliases, assignments = group_data.get("aliases", {}), group_data["source_groups"]
+        image_groups = group_data.get("image_groups", {})
+    elif manifest.exists():
         aliases, assignments = {}, {}
         with manifest.open() as stream:
             for row in csv.DictReader(stream):
@@ -94,7 +101,7 @@ def prepare(archive, output):
             continue
         original_split = image_path.parts[-3]
         stem = re.split(r"_(?:jpg|jpeg|png)\.rf\.", image_path.name)[0]
-        group = aliases.get(stem)
+        group = image_groups.get(image_path.name) or aliases.get(stem)
         if group is None:
             raise ValueError(f"Cannot identify source group for {image_path.name}")
         split = assignments[group]
@@ -127,8 +134,8 @@ def prepare(archive, output):
         audit["files"].append({"image": image_path.name, "group": group,
                                "original_split": original_split, "split": split,
                                "instances": len(labels), "pixel_sha256": digest})
-    if sum(image_counts.values()) != 50:
-        raise ValueError(f"Expected 50 images, got {sum(image_counts.values())}")
+    if sum(image_counts.values()) != expected_count:
+        raise ValueError(f"Expected {expected_count} images, got {sum(image_counts.values())}")
     for split, counts in class_counts.items():
         if set(counts) != {0, 1, 2}:
             raise ValueError(f"Split {split} misses classes: {counts}")
@@ -141,7 +148,7 @@ def prepare(archive, output):
               "test": "test/images", "nc": 3, "names": names}
     (output / "data.yaml").write_text(yaml.safe_dump(config, sort_keys=False))
     (output / "audit.json").write_text(json.dumps(audit, indent=2) + "\n")
-    report = ROOT / "reports" / "dataset-audit.json"
+    report = audit_report or ROOT / "reports" / "dataset-audit.json"
     report.parent.mkdir(exist_ok=True)
     report.write_text(json.dumps(audit, indent=2) + "\n")
     print(json.dumps({k: v for k, v in audit.items() if k != "files"}, indent=2))
@@ -152,5 +159,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, default=ROOT / "models" / "kv-yolo.v1-v0.1.0.yolov11.zip")
     parser.add_argument("--output", type=Path, default=ROOT / "models" / "training-dataset")
+    parser.add_argument("--raw", type=Path)
+    parser.add_argument("--groups-config", type=Path)
+    parser.add_argument("--expected-count", type=int, default=50)
+    parser.add_argument("--audit-report", type=Path)
     args = parser.parse_args()
-    print(prepare(args.archive.resolve(), args.output.resolve()))
+    print(prepare(args.archive.resolve(), args.output.resolve(), raw=args.raw,
+                  groups_config=args.groups_config, expected_count=args.expected_count,
+                  audit_report=args.audit_report))

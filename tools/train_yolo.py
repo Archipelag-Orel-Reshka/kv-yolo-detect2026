@@ -18,6 +18,9 @@ def main():
     parser.add_argument("--config", type=Path, default=ROOT / "config/yolo11n-training.yaml")
     parser.add_argument("--threads", type=int, default=6)
     parser.add_argument("--name", default="yolo11n-80epochs")
+    parser.add_argument("--weights", type=Path, default=ROOT / "models/base/yolo11n.pt")
+    parser.add_argument("--no-deploy", action="store_true", help="evaluate candidate without replacing active weights")
+    parser.add_argument("--report-prefix", default="yolo11n")
     args = parser.parse_args()
     if not args.data.exists():
         parser.error("Prepare the dataset first with tools/prepare_training_dataset.py")
@@ -39,12 +42,12 @@ def main():
     run = ROOT / "models/runs" / args.name
     if run.exists():
         raise FileExistsError(f"Run already exists: {run}. Pick a different --name.")
-    base = ROOT / "models/base/yolo11n.pt"
+    base = args.weights.resolve()
     if not base.exists():
-        raise FileNotFoundError(f"Put the COCO-pretrained YOLO11n checkpoint at {base}")
+        raise FileNotFoundError(f"Missing initial checkpoint: {base}")
     model = YOLO(str(base))
-    if model.task != "detect" or len(model.names) != 80:
-        raise ValueError("Expected the original COCO detection checkpoint")
+    if model.task != "detect" or (len(model.names) != 80 and list(model.names.values()) != ["Pin", "Piston", "Shatun"]):
+        raise ValueError("Expected COCO or the trained three-class detector")
     started = time.time()
     progress = ROOT / "build/training-progress.json"
     progress.parent.mkdir(parents=True, exist_ok=True)
@@ -57,23 +60,24 @@ def main():
         temp.replace(progress)
 
     model.add_callback("on_fit_epoch_end", record_progress)
-    model.train(data=str(args.data.resolve()), project=str(ROOT / "models/runs"), name=args.name,
+    model.train(data=str(args.data.resolve()), project=str(ROOT / "models/runs"), name=args.name, resume=False,
                 exist_ok=False, **config)
     rows = list(csv.DictReader((run / "results.csv").open()))
     if len(rows) != 80:
         raise RuntimeError(f"Only {len(rows)} epochs completed")
-    deployed = ROOT / "models/conveyor-yolo11n.pt"
-    shutil.copyfile(run / "weights/best.pt", deployed)
+    deployed = run / "weights/best.pt"
     best = YOLO(str(deployed))
     report = {"model": "YOLO11n", "device": "cpu", "epochs_completed": len(rows),
               "torch": torch.__version__, "ultralytics": ultralytics.__version__,
               "cuda_compiled": torch.version.cuda, "classes": best.names,
+              "initial_weights": str(base.relative_to(ROOT)),
+              "initial_weights_sha256": hashlib.sha256(base.read_bytes()).hexdigest(),
               "training_seconds": time.time() - started,
               "weights_sha256": hashlib.sha256(deployed.read_bytes()).hexdigest(), "splits": {}}
     for split in ("val", "test"):
         metrics = best.val(data=str(args.data.resolve()), split=split, device="cpu", imgsz=config["imgsz"],
                            batch=config["batch"], workers=0, plots=True,
-                           project=str(ROOT / "models/evaluation"), name=split, exist_ok=False)
+                           project=str(ROOT / "models/evaluation"), name=f"{args.name}-{split}", exist_ok=False)
         report["splits"][split] = {"precision": float(metrics.box.mp), "recall": float(metrics.box.mr),
                                    "map50": float(metrics.box.map50), "map50_95": float(metrics.box.map),
                                    "per_class_map50_95": {best.names[i]: float(v) for i, v in enumerate(metrics.box.maps)},
@@ -82,7 +86,7 @@ def main():
     test_folder = Path(dataset["path"]) / dataset["test"]
     predictions = best.predict(source=str(test_folder), device="cpu", imgsz=config["imgsz"],
                                conf=0.25, save=True, save_txt=True, save_conf=True,
-                               project=str(ROOT / "models/evaluation"), name="test-predictions", exist_ok=False)
+                               project=str(ROOT / "models/evaluation"), name=f"{args.name}-test-predictions", exist_ok=False)
     report["test_predictions"] = [{"image": Path(r.path).name,
                                    "detections": [{"class": best.names[int(c)], "confidence": float(conf),
                                                    "xyxy": [float(v) for v in box]}
@@ -90,13 +94,15 @@ def main():
                                   for r in predictions]
     report_dir = ROOT / "reports"
     report_dir.mkdir(exist_ok=True)
-    (report_dir / "yolo11n-evaluation.json").write_text(json.dumps(report, indent=2) + "\n")
-    shutil.copyfile(run / "results.csv", report_dir / "yolo11n-training.csv")
-    shutil.copyfile(run / "results.png", report_dir / "yolo11n-training.png")
+    (report_dir / f"{args.report_prefix}-evaluation.json").write_text(json.dumps(report, indent=2) + "\n")
+    shutil.copyfile(run / "results.csv", report_dir / f"{args.report_prefix}-training.csv")
+    shutil.copyfile(run / "results.png", report_dir / f"{args.report_prefix}-training.png")
     for split in ("val", "test"):
-        source = ROOT / "models/evaluation" / split / "confusion_matrix_normalized.png"
+        source = ROOT / "models/evaluation" / f"{args.name}-{split}" / "confusion_matrix_normalized.png"
         if source.exists():
-            shutil.copyfile(source, report_dir / f"yolo11n-{split}-confusion.png")
+            shutil.copyfile(source, report_dir / f"{args.report_prefix}-{split}-confusion.png")
+    if not args.no_deploy:
+        shutil.copyfile(deployed, ROOT / "models/conveyor-yolo11n.pt")
     print("TRAINING_AND_EVALUATION_COMPLETE", json.dumps(report, indent=2))
 
 

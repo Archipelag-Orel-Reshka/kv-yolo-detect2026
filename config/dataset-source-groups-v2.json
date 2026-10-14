@@ -1,0 +1,674 @@
+{
+  "archive_sha256": "ec541739ddc89e5552212c2f0f1fb2fab7c3387538d96f89048c0ea0195d0708",
+  "source_groups": {
+    "v1-g01": "train",
+    "v1-g02": "train",
+    "v1-g03": "train",
+    "v1-g04": "test",
+    "v1-g05": "valid",
+    "v1-g06": "test",
+    "v1-g07": "train",
+    "v1-g08": "valid",
+    "v1-g09": "test",
+    "v1-g10": "train",
+    "v1-g11": "train",
+    "v1-g12": "valid",
+    "v1-g13": "train",
+    "v2-g01": "test",
+    "v2-g02": "train",
+    "v2-g03": "valid",
+    "v2-g04": "test",
+    "v2-g05": "train",
+    "v2-g06": "train",
+    "v2-g07": "valid",
+    "v2-g08": "test",
+    "v2-g09": "train",
+    "v2-g10": "valid"
+  },
+  "image_groups": {
+    "g01_aug05_jpg.rf.f743b274ecfaea00ce446ac3cf338f8e.jpg": "v1-g01",
+    "g02_aug02_jpg.rf.f043672d67f1a0d028dcb1c9c6e8dd6b.jpg": "v1-g02",
+    "g10_aug01_jpg.rf.593a27fa775aa06ad967088c9ab6bc86.jpg": "v2-g10",
+    "photo_2026-10-14_11-56-27_jpg.rf.14113a832115cf1e7ba0332c1acf5df8.jpg": "v1-g08",
+    "111111111_jpg.rf.aaf5f969c6511dd47de3004177973982.jpg": "v1-g03",
+    "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg": "v1-g06",
+    "dddd_jpg.rf.3c0327fd035874b138202044022fa64e.jpg": "v1-g05",
+    "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg": "v1-g04",
+    "g01_aug01_jpg.rf.8bba5904520e95e36ed26da30a3acd38.jpg": "v2-g01",
+    "g01_aug01_jpg.rf.e2403a952403e6b976bb6cc7809d0d5e.jpg": "v1-g01",
+    "g01_aug02_jpg.rf.5f412cb3c6c251cacee7bd3d4161453d.jpg": "v1-g01",
+    "g01_aug04_jpg.rf.a646c03d9a11c8b09dd8bc656f15440b.jpg": "v1-g01",
+    "g01_aug06_jpg.rf.816a1b1879a2d347b5d7cfd373d1ef96.jpg": "v1-g01",
+    "g02_aug01_jpg.rf.5c131a0cc642be91d9cd3f2419e5e22e.jpg": "v1-g02",
+    "g02_aug01_jpg.rf.c447e63ff752b885d796512b8c1a4651.jpg": "v2-g02",
+    "g02_aug03_jpg.rf.2c47555308aa5c58e7eda2d21cc374c5.jpg": "v1-g02",
+    "g02_aug05_jpg.rf.c647853a897031556cfd06375a712419.jpg": "v1-g02",
+    "g02_aug06_jpg.rf.9a4604d06aeaf411f76d951b682da490.jpg": "v1-g02",
+    "g03_aug01_jpg.rf.40a25cf959f68624dfc56509a4c5ac3a.jpg": "v2-g03",
+    "g03_aug01_jpg.rf.d282d599315c76b391a4f5fa3a033a30.jpg": "v1-g03",
+    "g03_aug02_jpg.rf.a75909dc6e14857cb34512b2c2126e91.jpg": "v2-g03",
+    "g03_aug03_jpg.rf.dd3784c1a2d505b29ea4f00909071ce7.jpg": "v1-g03",
+    "g03_aug04_jpg.rf.c34a039facf162f7adfe8bbb40d66bc6.jpg": "v1-g03",
+    "g03_aug05_jpg.rf.8ec66906eeb086bb2ab56359c9bad010.jpg": "v1-g03",
+    "g04_aug01_jpg.rf.a89e4ac34b9d1915bf204128b2534f22.jpg": "v2-g04",
+    "g04_aug02_jpg.rf.718c88a303ffccd1da98632d7e3f9f4d.jpg": "v2-g04",
+    "g05_aug01_jpg.rf.4c4479c85c48ea81fa70bd20c87f1824.jpg": "v2-g05",
+    "g05_aug02_jpg.rf.17768c7bf9d3150bc005501a92f8abe8.jpg": "v2-g05",
+    "g06_aug01_jpg.rf.66e675705c1b8ea48bd1503a15de54a8.jpg": "v2-g06",
+    "g07_aug01_jpg.rf.53999d1aea317d8fe6e0fe5ec01f9d9d.jpg": "v2-g07",
+    "g07_aug02_jpg.rf.68866fae74915deb2ae7dadbcb96482e.jpg": "v2-g07",
+    "g07_aug02_jpg.rf.c6151c104ebc9497c7460c268c5fd29a.jpg": "v1-g07",
+    "g07_aug03_jpg.rf.abf25b92ecf50877fff6255f466f6047.jpg": "v1-g07",
+    "g07_aug04_jpg.rf.0bd9c840af22cc05524fda422f6c35c8.jpg": "v1-g07",
+    "g07_aug05_jpg.rf.432522510f045989dd993c567fd918d9.jpg": "v1-g07",
+    "g08_aug01_jpg.rf.1553630183087985c70969b87eead4b2.jpg": "v2-g08",
+    "g08_aug02_jpg.rf.30b1ab79be44311877afa096bf8401f2.jpg": "v2-g08",
+    "g09_aug02_jpg.rf.ca4ab1094cd3afd0e8665fefee3593c6.jpg": "v2-g09",
+    "g10_aug02_jpg.rf.651fc5645a4ed1e682403ea4dba86785.jpg": "v1-g10",
+    "g10_aug02_jpg.rf.bc9d2bc4fc6db6872b8875af49ce600e.jpg": "v2-g10",
+    "g10_aug03_jpg.rf.e95b964c8f770ed8b4a155afb906c7f9.jpg": "v1-g10",
+    "g10_aug04_jpg.rf.8277250e01cdacc8a12c128ddc5a6c7f.jpg": "v1-g10",
+    "g11_aug01_jpg.rf.50c255f6eec231dc1ba297c0ff184912.jpg": "v1-g11",
+    "g11_aug02_jpg.rf.87ba3e648244ba07c6729e632b71dbfc.jpg": "v1-g11",
+    "g11_aug04_jpg.rf.1c6fe75c8d4db8155eb9b6c56bcdfdd8.jpg": "v1-g11",
+    "g11_aug05_jpg.rf.c2c72ef02f437bbbe32c32fa044547fa.jpg": "v1-g11",
+    "g13_aug01_jpg.rf.938d8f0f610f45e71a016c7631c55d19.jpg": "v1-g13",
+    "g13_aug02_jpg.rf.83b9a3617ea644efa0824dd65dc7130e.jpg": "v1-g13",
+    "g13_aug03_jpg.rf.d52054333aef013a40d4b13ad6fa45bb.jpg": "v1-g13",
+    "g13_aug04_jpg.rf.b9ba6dca645682937f0d61b5d218167a.jpg": "v1-g13",
+    "g13_aug05_jpg.rf.9cdc070bb35b6d7059cd83e93bfd19a8.jpg": "v1-g13",
+    "photo_2026-10-14_11-56-22_jpg.rf.16b381ffeab8a9ac01fe727a8893f999.jpg": "v1-g07",
+    "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg": "v1-g09",
+    "photo_2026-10-14_11-56-36_jpg.rf.642b5fb7c67b6bc4afb0f2818614b361.jpg": "v1-g10",
+    "photo_2026-10-14_11-56-50_jpg.rf.8d78c139b58f5126687238c78c67bcfc.jpg": "v1-g11",
+    "photo_2026-10-14_11-56-54_jpg.rf.03bf79cf0e3436ec5672373ef3767c5e.jpg": "v1-g12",
+    "photo_2026-10-14_11-57-06_jpg.rf.3ed0493bae9171e75bccbc644143b082.jpg": "v1-g13",
+    "photo_2026-10-14_15-04-40_jpg.rf.e34edd891354d1c04409e3f59d442f8b.jpg": "v2-g01",
+    "photo_2026-10-14_15-05-05_jpg.rf.a0192c4117af5106da94c5c604428b3c.jpg": "v2-g02",
+    "photo_2026-10-14_15-05-10_jpg.rf.70f17be0c0d9471cd8e21595236c2dac.jpg": "v2-g03",
+    "photo_2026-10-14_15-05-21_jpg.rf.0dea596ee93a5fdeed0ea60172e4a84a.jpg": "v2-g05",
+    "photo_2026-10-14_15-05-27_jpg.rf.a716b72d1481c6e2a9632e1dbf408754.jpg": "v2-g06",
+    "photo_2026-10-14_15-05-33_jpg.rf.10df9fa3ab48f07dcbc1bedd3274ba47.jpg": "v2-g07",
+    "photo_2026-10-14_15-05-37_jpg.rf.5d212b755bc0f19101bad32f36801d2a.jpg": "v2-g08",
+    "photo_2026-10-14_15-05-41_jpg.rf.63fb89f472f5ceca30cc30e4b9593ef8.jpg": "v2-g09",
+    "photo_2026-10-14_15-05-46_jpg.rf.71d30ffca755f740bf8c553b28cc3307.jpg": "v2-g10",
+    "11111_jpg.rf.23a29c8f6cbfc15a035af0359834ff91.jpg": "v1-g02",
+    "eddwdw_jpg.rf.2eae7c26d17066f042b268a3ea527e8e.jpg": "v1-g01",
+    "g01_aug02_jpg.rf.d5616a3cd891df7b27010b7eda01711f.jpg": "v2-g01",
+    "g01_aug03_jpg.rf.f09896f43713e9823ce58377649cddf0.jpg": "v1-g01",
+    "g02_aug02_jpg.rf.a1647effb272d2cfb91e9760daebb9f1.jpg": "v2-g02",
+    "g02_aug04_jpg.rf.dedb3df6d599ae2f4db5a78fd729f3d4.jpg": "v1-g02",
+    "g03_aug02_jpg.rf.cae5c0fed5aa872bd537349841ab0bf1.jpg": "v1-g03",
+    "g06_aug02_jpg.rf.54f821c1f7ab65d9810b2d1b68c81f91.jpg": "v2-g06",
+    "g07_aug01_jpg.rf.01be5b7f4ef0f5beb3a298d66d37652d.jpg": "v1-g07",
+    "g09_aug01_jpg.rf.a18738095061d5c3c7ee8e58c29453a8.jpg": "v2-g09",
+    "g10_aug01_jpg.rf.9be0526da823959aa56f98408b98aa5f.jpg": "v1-g10",
+    "g10_aug05_jpg.rf.f2d01bd54b036c969904e1e242d79a0a.jpg": "v1-g10",
+    "g11_aug03_jpg.rf.a0f440a207659276eeb82d89f2e7b3f9.jpg": "v1-g11",
+    "photo_2026-10-14_15-05-17_jpg.rf.2fef452135b44610b000de28be2d31d2.jpg": "v2-g04"
+  },
+  "aliases": {},
+  "method": "Filename match; ambiguous v1/v2 names resolved by RGB MAE after 128x128 resizing. Alternative group must be >3 MAE farther, best <10.",
+  "matches": [
+    {
+      "image": "g01_aug05_jpg.rf.f743b274ecfaea00ce446ac3cf338f8e.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug05.jpg",
+      "pixel_mae": 1.2237,
+      "next_group_mae": null
+    },
+    {
+      "image": "g02_aug02_jpg.rf.f043672d67f1a0d028dcb1c9c6e8dd6b.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug02.jpg",
+      "pixel_mae": 1.2014,
+      "next_group_mae": 33.7205
+    },
+    {
+      "image": "g10_aug01_jpg.rf.593a27fa775aa06ad967088c9ab6bc86.jpg",
+      "source_group": "v2-g10",
+      "source_file": "newdataset/g10_aug01.jpg",
+      "pixel_mae": 1.184,
+      "next_group_mae": 47.0052
+    },
+    {
+      "image": "photo_2026-10-14_11-56-27_jpg.rf.14113a832115cf1e7ba0332c1acf5df8.jpg",
+      "source_group": "v1-g08",
+      "source_file": "dataset/roboflow-upload/valid/g08_original.jpg",
+      "pixel_mae": 1.1449,
+      "next_group_mae": null
+    },
+    {
+      "image": "111111111_jpg.rf.aaf5f969c6511dd47de3004177973982.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_original.jpg",
+      "pixel_mae": 1.2158,
+      "next_group_mae": null
+    },
+    {
+      "image": "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg",
+      "source_group": "v1-g06",
+      "source_file": "dataset/roboflow-upload/test/g06_original.jpg",
+      "pixel_mae": 1.2488,
+      "next_group_mae": null
+    },
+    {
+      "image": "dddd_jpg.rf.3c0327fd035874b138202044022fa64e.jpg",
+      "source_group": "v1-g05",
+      "source_file": "dataset/roboflow-upload/valid/g05_original.jpg",
+      "pixel_mae": 1.1367,
+      "next_group_mae": null
+    },
+    {
+      "image": "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg",
+      "source_group": "v1-g04",
+      "source_file": "dataset/roboflow-upload/test/g04_original.jpg",
+      "pixel_mae": 1.2243,
+      "next_group_mae": null
+    },
+    {
+      "image": "g01_aug01_jpg.rf.8bba5904520e95e36ed26da30a3acd38.jpg",
+      "source_group": "v2-g01",
+      "source_file": "newdataset/g01_aug01.jpg",
+      "pixel_mae": 1.0296,
+      "next_group_mae": 43.2442
+    },
+    {
+      "image": "g01_aug01_jpg.rf.e2403a952403e6b976bb6cc7809d0d5e.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug01.jpg",
+      "pixel_mae": 1.0408,
+      "next_group_mae": 43.4153
+    },
+    {
+      "image": "g01_aug02_jpg.rf.5f412cb3c6c251cacee7bd3d4161453d.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug02.jpg",
+      "pixel_mae": 1.251,
+      "next_group_mae": 58.2893
+    },
+    {
+      "image": "g01_aug04_jpg.rf.a646c03d9a11c8b09dd8bc656f15440b.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug04.jpg",
+      "pixel_mae": 1.3449,
+      "next_group_mae": null
+    },
+    {
+      "image": "g01_aug06_jpg.rf.816a1b1879a2d347b5d7cfd373d1ef96.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug06.jpg",
+      "pixel_mae": 1.2653,
+      "next_group_mae": null
+    },
+    {
+      "image": "g02_aug01_jpg.rf.5c131a0cc642be91d9cd3f2419e5e22e.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug01.jpg",
+      "pixel_mae": 1.2507,
+      "next_group_mae": 42.2673
+    },
+    {
+      "image": "g02_aug01_jpg.rf.c447e63ff752b885d796512b8c1a4651.jpg",
+      "source_group": "v2-g02",
+      "source_file": "newdataset/g02_aug01.jpg",
+      "pixel_mae": 1.2109,
+      "next_group_mae": 42.0518
+    },
+    {
+      "image": "g02_aug03_jpg.rf.2c47555308aa5c58e7eda2d21cc374c5.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug03.jpg",
+      "pixel_mae": 1.2139,
+      "next_group_mae": null
+    },
+    {
+      "image": "g02_aug05_jpg.rf.c647853a897031556cfd06375a712419.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug05.jpg",
+      "pixel_mae": 1.2931,
+      "next_group_mae": null
+    },
+    {
+      "image": "g02_aug06_jpg.rf.9a4604d06aeaf411f76d951b682da490.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug06.jpg",
+      "pixel_mae": 1.233,
+      "next_group_mae": null
+    },
+    {
+      "image": "g03_aug01_jpg.rf.40a25cf959f68624dfc56509a4c5ac3a.jpg",
+      "source_group": "v2-g03",
+      "source_file": "newdataset/g03_aug01.jpg",
+      "pixel_mae": 1.0675,
+      "next_group_mae": 36.9062
+    },
+    {
+      "image": "g03_aug01_jpg.rf.d282d599315c76b391a4f5fa3a033a30.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_aug01.jpg",
+      "pixel_mae": 1.0787,
+      "next_group_mae": 37.0517
+    },
+    {
+      "image": "g03_aug02_jpg.rf.a75909dc6e14857cb34512b2c2126e91.jpg",
+      "source_group": "v2-g03",
+      "source_file": "newdataset/g03_aug02.jpg",
+      "pixel_mae": 1.2687,
+      "next_group_mae": 43.3709
+    },
+    {
+      "image": "g03_aug03_jpg.rf.dd3784c1a2d505b29ea4f00909071ce7.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_aug03.jpg",
+      "pixel_mae": 1.1184,
+      "next_group_mae": null
+    },
+    {
+      "image": "g03_aug04_jpg.rf.c34a039facf162f7adfe8bbb40d66bc6.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_aug04.jpg",
+      "pixel_mae": 1.3636,
+      "next_group_mae": null
+    },
+    {
+      "image": "g03_aug05_jpg.rf.8ec66906eeb086bb2ab56359c9bad010.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_aug05.jpg",
+      "pixel_mae": 1.363,
+      "next_group_mae": null
+    },
+    {
+      "image": "g04_aug01_jpg.rf.a89e4ac34b9d1915bf204128b2534f22.jpg",
+      "source_group": "v2-g04",
+      "source_file": "newdataset/g04_aug01.jpg",
+      "pixel_mae": 1.2462,
+      "next_group_mae": null
+    },
+    {
+      "image": "g04_aug02_jpg.rf.718c88a303ffccd1da98632d7e3f9f4d.jpg",
+      "source_group": "v2-g04",
+      "source_file": "newdataset/g04_aug02.jpg",
+      "pixel_mae": 1.2479,
+      "next_group_mae": null
+    },
+    {
+      "image": "g05_aug01_jpg.rf.4c4479c85c48ea81fa70bd20c87f1824.jpg",
+      "source_group": "v2-g05",
+      "source_file": "newdataset/g05_aug01.jpg",
+      "pixel_mae": 1.2191,
+      "next_group_mae": null
+    },
+    {
+      "image": "g05_aug02_jpg.rf.17768c7bf9d3150bc005501a92f8abe8.jpg",
+      "source_group": "v2-g05",
+      "source_file": "newdataset/g05_aug02.jpg",
+      "pixel_mae": 0.9495,
+      "next_group_mae": null
+    },
+    {
+      "image": "g06_aug01_jpg.rf.66e675705c1b8ea48bd1503a15de54a8.jpg",
+      "source_group": "v2-g06",
+      "source_file": "newdataset/g06_aug01.jpg",
+      "pixel_mae": 1.1774,
+      "next_group_mae": null
+    },
+    {
+      "image": "g07_aug01_jpg.rf.53999d1aea317d8fe6e0fe5ec01f9d9d.jpg",
+      "source_group": "v2-g07",
+      "source_file": "newdataset/g07_aug01.jpg",
+      "pixel_mae": 1.0351,
+      "next_group_mae": 45.5245
+    },
+    {
+      "image": "g07_aug02_jpg.rf.68866fae74915deb2ae7dadbcb96482e.jpg",
+      "source_group": "v2-g07",
+      "source_file": "newdataset/g07_aug02.jpg",
+      "pixel_mae": 1.0319,
+      "next_group_mae": 42.6829
+    },
+    {
+      "image": "g07_aug02_jpg.rf.c6151c104ebc9497c7460c268c5fd29a.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_aug02.jpg",
+      "pixel_mae": 1.3137,
+      "next_group_mae": 42.574
+    },
+    {
+      "image": "g07_aug03_jpg.rf.abf25b92ecf50877fff6255f466f6047.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_aug03.jpg",
+      "pixel_mae": 1.1945,
+      "next_group_mae": null
+    },
+    {
+      "image": "g07_aug04_jpg.rf.0bd9c840af22cc05524fda422f6c35c8.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_aug04.jpg",
+      "pixel_mae": 1.0917,
+      "next_group_mae": null
+    },
+    {
+      "image": "g07_aug05_jpg.rf.432522510f045989dd993c567fd918d9.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_aug05.jpg",
+      "pixel_mae": 1.2339,
+      "next_group_mae": null
+    },
+    {
+      "image": "g08_aug01_jpg.rf.1553630183087985c70969b87eead4b2.jpg",
+      "source_group": "v2-g08",
+      "source_file": "newdataset/g08_aug01.jpg",
+      "pixel_mae": 1.1666,
+      "next_group_mae": null
+    },
+    {
+      "image": "g08_aug02_jpg.rf.30b1ab79be44311877afa096bf8401f2.jpg",
+      "source_group": "v2-g08",
+      "source_file": "newdataset/g08_aug02.jpg",
+      "pixel_mae": 1.1146,
+      "next_group_mae": null
+    },
+    {
+      "image": "g09_aug02_jpg.rf.ca4ab1094cd3afd0e8665fefee3593c6.jpg",
+      "source_group": "v2-g09",
+      "source_file": "newdataset/g09_aug02.jpg",
+      "pixel_mae": 1.0506,
+      "next_group_mae": null
+    },
+    {
+      "image": "g10_aug02_jpg.rf.651fc5645a4ed1e682403ea4dba86785.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_aug02.jpg",
+      "pixel_mae": 1.09,
+      "next_group_mae": 52.3023
+    },
+    {
+      "image": "g10_aug02_jpg.rf.bc9d2bc4fc6db6872b8875af49ce600e.jpg",
+      "source_group": "v2-g10",
+      "source_file": "newdataset/g10_aug02.jpg",
+      "pixel_mae": 1.2351,
+      "next_group_mae": 52.1882
+    },
+    {
+      "image": "g10_aug03_jpg.rf.e95b964c8f770ed8b4a155afb906c7f9.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_aug03.jpg",
+      "pixel_mae": 1.1832,
+      "next_group_mae": null
+    },
+    {
+      "image": "g10_aug04_jpg.rf.8277250e01cdacc8a12c128ddc5a6c7f.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_aug04.jpg",
+      "pixel_mae": 1.0655,
+      "next_group_mae": null
+    },
+    {
+      "image": "g11_aug01_jpg.rf.50c255f6eec231dc1ba297c0ff184912.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_aug01.jpg",
+      "pixel_mae": 1.0845,
+      "next_group_mae": null
+    },
+    {
+      "image": "g11_aug02_jpg.rf.87ba3e648244ba07c6729e632b71dbfc.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_aug02.jpg",
+      "pixel_mae": 1.1802,
+      "next_group_mae": null
+    },
+    {
+      "image": "g11_aug04_jpg.rf.1c6fe75c8d4db8155eb9b6c56bcdfdd8.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_aug04.jpg",
+      "pixel_mae": 1.1595,
+      "next_group_mae": null
+    },
+    {
+      "image": "g11_aug05_jpg.rf.c2c72ef02f437bbbe32c32fa044547fa.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_aug05.jpg",
+      "pixel_mae": 1.1181,
+      "next_group_mae": null
+    },
+    {
+      "image": "g13_aug01_jpg.rf.938d8f0f610f45e71a016c7631c55d19.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_aug01.jpg",
+      "pixel_mae": 1.0912,
+      "next_group_mae": null
+    },
+    {
+      "image": "g13_aug02_jpg.rf.83b9a3617ea644efa0824dd65dc7130e.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_aug02.jpg",
+      "pixel_mae": 1.268,
+      "next_group_mae": null
+    },
+    {
+      "image": "g13_aug03_jpg.rf.d52054333aef013a40d4b13ad6fa45bb.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_aug03.jpg",
+      "pixel_mae": 1.2219,
+      "next_group_mae": null
+    },
+    {
+      "image": "g13_aug04_jpg.rf.b9ba6dca645682937f0d61b5d218167a.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_aug04.jpg",
+      "pixel_mae": 1.2073,
+      "next_group_mae": null
+    },
+    {
+      "image": "g13_aug05_jpg.rf.9cdc070bb35b6d7059cd83e93bfd19a8.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_aug05.jpg",
+      "pixel_mae": 1.2505,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-56-22_jpg.rf.16b381ffeab8a9ac01fe727a8893f999.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_original.jpg",
+      "pixel_mae": 1.2204,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg",
+      "source_group": "v1-g09",
+      "source_file": "dataset/roboflow-upload/test/g09_original.jpg",
+      "pixel_mae": 1.1033,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-56-36_jpg.rf.642b5fb7c67b6bc4afb0f2818614b361.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_original.jpg",
+      "pixel_mae": 1.2387,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-56-50_jpg.rf.8d78c139b58f5126687238c78c67bcfc.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_original.jpg",
+      "pixel_mae": 1.094,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-56-54_jpg.rf.03bf79cf0e3436ec5672373ef3767c5e.jpg",
+      "source_group": "v1-g12",
+      "source_file": "dataset/roboflow-upload/valid/g12_original.jpg",
+      "pixel_mae": 1.1756,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_11-57-06_jpg.rf.3ed0493bae9171e75bccbc644143b082.jpg",
+      "source_group": "v1-g13",
+      "source_file": "dataset/roboflow-upload/train/g13_original.jpg",
+      "pixel_mae": 1.1969,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-04-40_jpg.rf.e34edd891354d1c04409e3f59d442f8b.jpg",
+      "source_group": "v2-g01",
+      "source_file": "newdataset/photo_2026-10-14_15-04-40.jpg",
+      "pixel_mae": 1.1771,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-05_jpg.rf.a0192c4117af5106da94c5c604428b3c.jpg",
+      "source_group": "v2-g02",
+      "source_file": "newdataset/photo_2026-10-14_15-05-05.jpg",
+      "pixel_mae": 1.2046,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-10_jpg.rf.70f17be0c0d9471cd8e21595236c2dac.jpg",
+      "source_group": "v2-g03",
+      "source_file": "newdataset/photo_2026-10-14_15-05-10.jpg",
+      "pixel_mae": 1.2143,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-21_jpg.rf.0dea596ee93a5fdeed0ea60172e4a84a.jpg",
+      "source_group": "v2-g05",
+      "source_file": "newdataset/photo_2026-10-14_15-05-21.jpg",
+      "pixel_mae": 1.1053,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-27_jpg.rf.a716b72d1481c6e2a9632e1dbf408754.jpg",
+      "source_group": "v2-g06",
+      "source_file": "newdataset/photo_2026-10-14_15-05-27.jpg",
+      "pixel_mae": 1.1722,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-33_jpg.rf.10df9fa3ab48f07dcbc1bedd3274ba47.jpg",
+      "source_group": "v2-g07",
+      "source_file": "newdataset/photo_2026-10-14_15-05-33.jpg",
+      "pixel_mae": 1.1131,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-37_jpg.rf.5d212b755bc0f19101bad32f36801d2a.jpg",
+      "source_group": "v2-g08",
+      "source_file": "newdataset/photo_2026-10-14_15-05-37.jpg",
+      "pixel_mae": 1.1256,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-41_jpg.rf.63fb89f472f5ceca30cc30e4b9593ef8.jpg",
+      "source_group": "v2-g09",
+      "source_file": "newdataset/photo_2026-10-14_15-05-41.jpg",
+      "pixel_mae": 1.0817,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-46_jpg.rf.71d30ffca755f740bf8c553b28cc3307.jpg",
+      "source_group": "v2-g10",
+      "source_file": "newdataset/photo_2026-10-14_15-05-46.jpg",
+      "pixel_mae": 1.1429,
+      "next_group_mae": null
+    },
+    {
+      "image": "11111_jpg.rf.23a29c8f6cbfc15a035af0359834ff91.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_original.jpg",
+      "pixel_mae": 1.2296,
+      "next_group_mae": null
+    },
+    {
+      "image": "eddwdw_jpg.rf.2eae7c26d17066f042b268a3ea527e8e.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_original.jpg",
+      "pixel_mae": 1.2113,
+      "next_group_mae": null
+    },
+    {
+      "image": "g01_aug02_jpg.rf.d5616a3cd891df7b27010b7eda01711f.jpg",
+      "source_group": "v2-g01",
+      "source_file": "newdataset/g01_aug02.jpg",
+      "pixel_mae": 1.228,
+      "next_group_mae": 58.1259
+    },
+    {
+      "image": "g01_aug03_jpg.rf.f09896f43713e9823ce58377649cddf0.jpg",
+      "source_group": "v1-g01",
+      "source_file": "dataset/roboflow-upload/train/g01_aug03.jpg",
+      "pixel_mae": 1.0175,
+      "next_group_mae": null
+    },
+    {
+      "image": "g02_aug02_jpg.rf.a1647effb272d2cfb91e9760daebb9f1.jpg",
+      "source_group": "v2-g02",
+      "source_file": "newdataset/g02_aug02.jpg",
+      "pixel_mae": 1.0966,
+      "next_group_mae": 33.6575
+    },
+    {
+      "image": "g02_aug04_jpg.rf.dedb3df6d599ae2f4db5a78fd729f3d4.jpg",
+      "source_group": "v1-g02",
+      "source_file": "dataset/roboflow-upload/train/g02_aug04.jpg",
+      "pixel_mae": 1.1644,
+      "next_group_mae": null
+    },
+    {
+      "image": "g03_aug02_jpg.rf.cae5c0fed5aa872bd537349841ab0bf1.jpg",
+      "source_group": "v1-g03",
+      "source_file": "dataset/roboflow-upload/train/g03_aug02.jpg",
+      "pixel_mae": 1.2885,
+      "next_group_mae": 43.4485
+    },
+    {
+      "image": "g06_aug02_jpg.rf.54f821c1f7ab65d9810b2d1b68c81f91.jpg",
+      "source_group": "v2-g06",
+      "source_file": "newdataset/g06_aug02.jpg",
+      "pixel_mae": 1.1367,
+      "next_group_mae": null
+    },
+    {
+      "image": "g07_aug01_jpg.rf.01be5b7f4ef0f5beb3a298d66d37652d.jpg",
+      "source_group": "v1-g07",
+      "source_file": "dataset/roboflow-upload/train/g07_aug01.jpg",
+      "pixel_mae": 1.2944,
+      "next_group_mae": 45.3494
+    },
+    {
+      "image": "g09_aug01_jpg.rf.a18738095061d5c3c7ee8e58c29453a8.jpg",
+      "source_group": "v2-g09",
+      "source_file": "newdataset/g09_aug01.jpg",
+      "pixel_mae": 1.0585,
+      "next_group_mae": null
+    },
+    {
+      "image": "g10_aug01_jpg.rf.9be0526da823959aa56f98408b98aa5f.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_aug01.jpg",
+      "pixel_mae": 1.4469,
+      "next_group_mae": 47.0249
+    },
+    {
+      "image": "g10_aug05_jpg.rf.f2d01bd54b036c969904e1e242d79a0a.jpg",
+      "source_group": "v1-g10",
+      "source_file": "dataset/roboflow-upload/train/g10_aug05.jpg",
+      "pixel_mae": 1.2226,
+      "next_group_mae": null
+    },
+    {
+      "image": "g11_aug03_jpg.rf.a0f440a207659276eeb82d89f2e7b3f9.jpg",
+      "source_group": "v1-g11",
+      "source_file": "dataset/roboflow-upload/train/g11_aug03.jpg",
+      "pixel_mae": 1.2647,
+      "next_group_mae": null
+    },
+    {
+      "image": "photo_2026-10-14_15-05-17_jpg.rf.2fef452135b44610b000de28be2d31d2.jpg",
+      "source_group": "v2-g04",
+      "source_file": "newdataset/photo_2026-10-14_15-05-17.jpg",
+      "pixel_mae": 1.1934,
+      "next_group_mae": null
+    }
+  ]
+}
