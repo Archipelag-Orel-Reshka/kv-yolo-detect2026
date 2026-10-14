@@ -23,6 +23,8 @@ int main() {
   unsigned changes = DxlMaster.modeWrites;
   command("INIT");
   assert(changes == DxlMaster.modeWrites);
+  command("DISCOVER");
+  assert(changes == DxlMaster.modeWrites && !running);
   command("START -50");
   assert(running && DxlMaster.registers[32] == 1074 && DxlMaster.registers[24] == 1);
   command("STOP");
@@ -47,6 +49,7 @@ int main() {
   DxlMaster.failRead = true;
   command("STOP");
   assert(stopPending && !running && !initialized);
+  assert(DxlMaster.registers[32] == 50); // No zero-speed write without torque-off readback.
   const auto savedBaud = motorBaud;
   command("SCAN");
   assert(stopPending && found && savedBaud == motorBaud);
@@ -65,6 +68,17 @@ int main() {
   command("START -50");
   assert(running && DxlMaster.registers[64] == 1 && DxlMaster.registers[104] == -50);
   command("STOP");
+  DxlMaster.expectedProtocol = 1;
+  DxlMaster.expectedModel = 310;
+  DxlMaster.registers[8] = 4095;
+  DxlMaster.registers[70] = 1;
+  command("SCAN"); command("INIT");
+  assert(initialized && kind == MX64 && DxlMaster.registers[70] == 0);
+  assert(DxlMaster.registers[6] == 0 && DxlMaster.registers[8] == 0);
+  command("START -50");
+  assert(running && DxlMaster.registers[24] == 1 && DxlMaster.registers[32] == 1074);
+  command("STOP");
+  DxlMaster.expectedProtocol = 2;
   DxlMaster.expectedModel = 350;
   command("SCAN"); command("INIT"); command("START -50");
   assert(running && DxlMaster.registers[24] == 1 && DxlMaster.registers[32] == 1074);

@@ -21,6 +21,9 @@ class Controller:
         self.port.flush()
         deadline = time.monotonic() + timeout
         lines = []
+        action = command.split()[0]
+        needs_status = action in ("INIT", "START", "STOP")
+        acknowledged = False
         while time.monotonic() < deadline:
             text = self.port.readline().decode("ascii", errors="replace").strip()
             if not text:
@@ -31,8 +34,12 @@ class Controller:
                 raise RuntimeError(text)
             if command in ("STATUS", "SCAN") and text.startswith("STATUS "):
                 return json.loads(text.removeprefix("STATUS "))
-            if text == "OK " + command.split()[0]:
-                return lines
+            if text == "OK " + action:
+                acknowledged = True
+                if not needs_status:
+                    return lines
+            if needs_status and acknowledged and text.startswith("STATUS "):
+                return json.loads(text.removeprefix("STATUS "))
         raise TimeoutError(f"No reply to {command}")
 
     def close(self):
@@ -46,7 +53,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", default=DEFAULT_PORT)
     sub = parser.add_subparsers(dest="action", required=True)
-    for name in ("status", "scan", "init", "stop"):
+    for name in ("status", "scan", "discover", "init", "stop"):
         sub.add_parser(name)
     run = sub.add_parser("run", help="Physically run the belt, then stop")
     run.add_argument("--speed", type=int, required=True)
@@ -57,7 +64,7 @@ def main():
     controller = Controller(args.port)
     try:
         if args.action != "run":
-            result = controller.command(args.action.upper(), timeout=10)
+            result = controller.command(args.action.upper(), timeout=120 if args.action == "discover" else 10)
             if args.action == "init":
                 result = controller.command("STATUS")
             if isinstance(result, dict):

@@ -5,7 +5,7 @@ constexpr uint8_t MOTOR_ID = 22;
 constexpr unsigned long USB_BAUD = 115200;
 constexpr uint32_t BAUDS[] = {1000000, 57600, 115200, 9600, 19200,
                              38400, 250000, 500000, 2000000};
-enum MotorKind : uint8_t { UNKNOWN, AX12, XL320, XL430 };
+enum MotorKind : uint8_t { UNKNOWN, AX12, MX64, XL320, XL430 };
 MotorKind kind = UNKNOWN;
 uint8_t protocol = 0;
 uint16_t modelNumber = 0;
@@ -42,7 +42,9 @@ bool stopMotor() {
   if (!found || kind == UNKNOWN) { stopPending = false; return !found; }
   // Disable torque even if the speed write or read fails.
   const bool torqueOff = writeVerified<uint8_t>(torqueAddress(), 0);
-  const bool zeroSpeed = writeSpeed(0);
+  // In joint mode, legacy Moving Speed=0 means maximum speed. Do not write
+  // it until torque-off is confirmed, including before the first INIT.
+  const bool zeroSpeed = torqueOff && writeSpeed(0);
   stopPending = !(torqueOff && zeroSpeed);
   if (stopPending) initialized = false;
   return !stopPending;
@@ -80,6 +82,7 @@ void scanMotor() {
       modelNumber = detected; motorBaud = BAUDS[b]; found = true;
       // Only control tables checked against ROBOTIS documentation are allowed.
       if (p == 1 && detected == 12) kind = AX12;
+      if (p == 1 && detected == 310) kind = MX64;
       if (p == 2 && detected == 350) kind = XL320;
       if (p == 2 && detected == 1060) kind = XL430;
       if (kind != UNKNOWN) stopMotor();
@@ -93,7 +96,12 @@ void scanMotor() {
 
 bool initializeMotor() {
   if (!found || kind == UNKNOWN || !stopMotor()) return false;
-  if (kind == AX12) {
+  if (kind == AX12 || kind == MX64) {
+    if (kind == MX64) {
+      uint8_t torqueMode = 0;
+      if (!readRegister(70, torqueMode)) return false;
+      if (torqueMode != 0 && !writeVerified<uint8_t>(70, 0)) return false;
+    }
     uint16_t cw = 0, ccw = 0;
     if (!readRegister(6, cw) || !readRegister(8, ccw)) return false;
     // Avoid unnecessary EEPROM writes on each start.
@@ -106,6 +114,33 @@ bool initializeMotor() {
   }
   initialized = writeSpeed(0);
   return initialized;
+}
+
+void discoverDevices() {
+  if (running || stopPending) {
+    Serial.println(F("ERR DISCOVER MUST_BE_STOPPED")); return;
+  }
+  // Read-only search, including IDs other than the expected belt motor.
+  for (uint8_t b = 0; b < sizeof(BAUDS) / sizeof(BAUDS[0]); ++b) {
+    DxlMaster.begin(BAUDS[b]);
+    DxlMaster.setTimeOut(3);
+    Serial.print(F("BUS ")); Serial.println(BAUDS[b]);
+    for (uint16_t id = 0; id <= 252; ++id) {
+      for (uint8_t p = 1; p <= 2; ++p) {
+        if (DxlMaster.ping(p, id) != DYN_STATUS_OK) continue;
+        uint16_t detected = 0;
+        if (DxlMaster.read(p, id, 0, detected, 2) != DYN_STATUS_OK) continue;
+        Serial.print(F("DEVICE {\"id\":")); Serial.print(id);
+        Serial.print(F(",\"model\":")); Serial.print(detected);
+        Serial.print(F(",\"protocol\":")); Serial.print(p);
+        Serial.print(F(",\"baud\":")); Serial.print(BAUDS[b]);
+        Serial.println(F("}"));
+      }
+    }
+  }
+  DxlMaster.begin(motorBaud ? motorBaud : BAUDS[0]);
+  DxlMaster.setTimeOut(10);
+  Serial.println(F("OK DISCOVER"));
 }
 
 void faultStop(const __FlashStringHelper *reason) {
@@ -126,6 +161,7 @@ void handleCommand(char *command) {
     printStatus(); return;
   }
   if (!strcmp(command, "SCAN")) { scanMotor(); return; }
+  if (!strcmp(command, "DISCOVER")) { discoverDevices(); return; }
   if (!strcmp(command, "INIT")) {
     if (running) { Serial.println(F("ERR INIT RUNNING")); return; }
     initialized = false;
