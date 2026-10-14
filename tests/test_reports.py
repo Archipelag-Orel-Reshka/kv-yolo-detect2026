@@ -115,7 +115,7 @@ class ReportCycle(unittest.TestCase):
         self.assertEqual(saved["team"], "Технопарк-33")
         self.assertTrue(saved["started_at"])
         table = list(csv.reader(io.StringIO(self.get("/api/report.csv").decode("utf-8-sig")), delimiter=";"))
-        self.assertEqual(table[0], ["Команда", "Дата", "Шпилька", "Поршень", "Шатун", "Всего"])
+        self.assertEqual(table[0], ["Команда", "Дата", "Клапан", "Поршень", "Шатун", "Всего"])
         self.assertEqual(table[1][-4:], ["1", "1", "1", "3"])
         self.assertIn("Технопарк-33", self.get("/api/report.txt").decode())
         old = Path(self.directory.name) / ("run-" + saved["run_id"] + ".json")

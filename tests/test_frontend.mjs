@@ -27,7 +27,7 @@ async function panel() {
     conveyor: {running: false, port: 'FAKE', connected: true, busy: false, status: {}},
     camera: {error: null, fps: 24, in_frame: 2, tracking: true, model: 'conveyor-yolo11n.pt'},
     counts: {Pin: 2, Piston: 1, Shatun: 3}, total: 6, tracked: 2,
-    labels: {Pin: 'Шпилька', Piston: 'Поршень', Shatun: 'Шатун'},
+    labels: {Pin: 'Клапан', Piston: 'Поршень', Shatun: 'Шатун'},
     report: {team: 'Технопарк-33', directory: 'reports/conveyor', updated_at: '2026-10-14T12:00:00+03:00'}
   };
   const requests = [];
@@ -51,7 +51,7 @@ test('API fields produce Russian counters and valid tracking status', async () =
   assert.match(p.node('tracked').textContent, /в кадре: 2/);
   assert.doesNotMatch(p.node('model').textContent, /недоступен|undefined/);
   assert.deepEqual(p.node('counts').children.map(row => row.children[0].textContent),
-    ['Шпилька', 'Поршень', 'Шатун']);
+    ['Клапан', 'Поршень', 'Шатун']);
   assert.equal(p.node('total').textContent, '6');
   assert.equal(p.node('team').textContent, 'Технопарк-33');
   assert.equal(p.node('report-links').hidden, false);
