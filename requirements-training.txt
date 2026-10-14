@@ -5,3 +5,4 @@ ultralytics==8.4.177
 PyYAML==6.0.3
 opencv-python==5.0.0.93
 numpy==2.5.2
+lap==0.5.13
