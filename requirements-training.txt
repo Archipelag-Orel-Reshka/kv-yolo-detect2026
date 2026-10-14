@@ -1,0 +1,7 @@
+-r requirements-dataset.txt
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
+ultralytics==8.4.177
+PyYAML==6.0.3
+opencv-python==5.0.0.93
+numpy==2.5.2

@@ -1,0 +1,98 @@
+{
+  "model": "YOLO11n",
+  "device": "cpu",
+  "epochs_completed": 80,
+  "torch": "2.14.1+cpu",
+  "ultralytics": "8.4.177",
+  "cuda_compiled": null,
+  "classes": {
+    "0": "Pin",
+    "1": "Piston",
+    "2": "Shatun"
+  },
+  "training_seconds": 345.6193461418152,
+  "weights_sha256": "333a8d1648370557e762392b9753f830da32f7a0f886196b8533f02a8e4e5fb4",
+  "splits": {
+    "val": {
+      "precision": 0.954185911806134,
+      "recall": 1.0,
+      "map50": 0.995,
+      "map50_95": 0.9618333333333334,
+      "per_class_map50_95": {
+        "Pin": 0.9949999999999999,
+        "Piston": 0.8955,
+        "Shatun": 0.9949999999999999
+      },
+      "speed_ms": {
+        "preprocess": 0.31448166676758166,
+        "inference": 11.33980900037083,
+        "loss": 0.000377332980860956,
+        "postprocess": 0.21886799974405827
+      }
+    },
+    "test": {
+      "precision": 0.8703154763133757,
+      "recall": 1.0,
+      "map50": 0.995,
+      "map50_95": 0.8291666666666668,
+      "per_class_map50_95": {
+        "Pin": 0.6965,
+        "Piston": 0.8955,
+        "Shatun": 0.8955
+      },
+      "speed_ms": {
+        "preprocess": 0.31389433327907074,
+        "inference": 11.155859666663067,
+        "loss": 0.0003939997744358455,
+        "postprocess": 0.20934733341467412
+      }
+    }
+  },
+  "test_predictions": [
+    {
+      "image": "d_jpg.rf.257104846af1ccb86ab59720447e69bb.jpg",
+      "detections": [
+        {
+          "class": "Piston",
+          "confidence": 0.9873795509338379,
+          "xyxy": [
+            148.27459716796875,
+            133.40997314453125,
+            262.24017333984375,
+            236.0970458984375
+          ]
+        }
+      ]
+    },
+    {
+      "image": "dddddddddd_jpg.rf.d5bb3974563c06d4e6e0199a4c57df29.jpg",
+      "detections": [
+        {
+          "class": "Shatun",
+          "confidence": 0.9584392309188843,
+          "xyxy": [
+            180.13577270507812,
+            157.06362915039062,
+            328.6459655761719,
+            268.6781005859375
+          ]
+        }
+      ]
+    },
+    {
+      "image": "photo_2026-10-14_11-56-32_jpg.rf.e3c96eb6aa2c918a44b8d96ae6a359ac.jpg",
+      "detections": [
+        {
+          "class": "Pin",
+          "confidence": 0.36781972646713257,
+          "xyxy": [
+            241.26698303222656,
+            130.1736297607422,
+            278.9995422363281,
+            178.05381774902344
+          ]
+        }
+      ]
+    }
+  ]
+}

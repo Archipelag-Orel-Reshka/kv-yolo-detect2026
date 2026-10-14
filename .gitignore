@@ -9,6 +9,13 @@ data/dataset/*
 !data/dataset/.gitkeep
 models/*
 !models/.gitkeep
+!models/conveyor-yolo11n.pt
 reports/*
 !reports/.gitkeep
+!reports/dataset-audit.json
+!reports/yolo11n-evaluation.json
+!reports/yolo11n-training.csv
+!reports/yolo11n-training.png
+!reports/yolo11n-val-confusion.png
+!reports/yolo11n-test-confusion.png
 .env
