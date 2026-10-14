@@ -116,9 +116,7 @@ XL430 задаёт скорость вращения. Первый тест лу
 
 ```bash
 ./tools/build-firmware.sh
-c++ -std=c++11 -include initializer_list tests/control_test.cpp -o /tmp/kv-control-test
-/tmp/kv-control-test
-.venv/bin/python -m py_compile tools/conveyor.py
+./tools/check.sh
 ```
 
 Официальные таблицы: [AX-12A](https://emanual.robotis.com/docs/en/dxl/ax/ax-12a/),

@@ -1,4 +1,5 @@
 #include <cassert>
+#include <initializer_list>
 #include "../firmware/conveyor_controller/control.h"
 
 int main() {
